@@ -22,16 +22,26 @@ export function ProgressCard({ user }: ProgressCardProps) {
   const level = user.current_level
   const pointsToNext = getPointsToNextLevel(user.total_points)
   const levelProgress = (() => {
-    const levels: Record<string, number> = { Beginner: 10, Novice: 50, Intermediate: 100, Advanced: 300, Master: Infinity }
-    const current = levels[level as keyof typeof levels] || 0
-    const prev: Record<string, number> = {
-      Beginner: 0,
-      Novice: 10,
-      Intermediate: 50,
-      Advanced: 100,
-      Master: 300,
+    const levelRanges = {
+      Beginner: { min: 0, max: 10 },
+      Novice: { min: 10, max: 50 },
+      Intermediate: { min: 50, max: 100 },
+      Advanced: { min: 100, max: 300 },
+      Master: { min: 300, max: 300 },
     }
-    return Math.round(((user.total_points - (prev[level] || 0)) / (current - (prev[level] || 0))) * 100)
+
+    const range =
+      levelRanges[level as keyof typeof levelRanges]
+
+    if (!range) return 0
+
+    if (level === 'Master') return 100
+
+    return Math.round(
+      ((user.total_points - range.min) /
+        (range.max - range.min)) *
+        100
+    )
   })()
 
   return (
@@ -72,7 +82,7 @@ export function ProgressCard({ user }: ProgressCardProps) {
             <div
               className="h-full rounded-full transition-all duration-300"
               style={{
-                width: `${levelProgress}%`,
+                width: `${Math.min(Math.max(levelProgress, 0), 100)}%`,
                 backgroundColor: getLevelColor(level),
               }}
             />

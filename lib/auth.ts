@@ -1,4 +1,45 @@
 import { createClient } from './supabase'
+import type { User as SupabaseAuthUser } from '@supabase/supabase-js'
+
+function getProfileUsername(authUser: SupabaseAuthUser, username?: string) {
+    const metadataUsername = authUser.user_metadata?.username
+    const emailName = authUser.email?.split('@')[0]
+    const fallback = `user-${authUser.id.slice(0, 8)}`
+
+    return username || (typeof metadataUsername === 'string' && metadataUsername) || emailName || fallback
+}
+
+export async function ensureUserProfile(authUser: SupabaseAuthUser, username?: string) {
+    const supabase = createClient()
+
+    const { data: existingProfile, error: fetchError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', authUser.id)
+        .maybeSingle()
+
+    if (fetchError) throw fetchError
+    if (existingProfile) return existingProfile
+
+    const now = new Date().toISOString()
+    const { data, error } = await supabase
+        .from('users')
+        .insert({
+            id: authUser.id,
+            email: authUser.email || '',
+            username: getProfileUsername(authUser, username),
+            password_hash: 'managed-by-supabase-auth',
+            total_points: 0,
+            current_level: 'Beginner',
+            created_at: now,
+            updated_at: now,
+        })
+        .select()
+        .single()
+
+    if (error) throw error
+    return data
+}
 
 export async function getCurrentUser() {
     const supabase = createClient()
@@ -15,6 +56,11 @@ export async function signUp(email: string, password: string, username: string) 
     const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+            data: {
+                username,
+            },
+        },
     })
 
     // Handle specific Supabase Auth errors
@@ -31,20 +77,7 @@ export async function signUp(email: string, password: string, username: string) 
 
     // Create user profile
     if (authData.user) {
-        const { error: profileError } = await supabase.from('users').insert({
-            id: authData.user.id,
-            email,
-            username,
-            total_points: 0,
-            current_level: 'Beginner',
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-        })
-
-        if (profileError) {
-            console.error('Profile creation error:', profileError)
-            // Don't throw - auth user is created, profile will be created on first login
-        }
+        await ensureUserProfile(authData.user, username)
     }
 
     return authData
@@ -58,6 +91,11 @@ export async function signIn(email: string, password: string) {
     })
 
     if (error) throw error
+
+    if (data.user) {
+        await ensureUserProfile(data.user)
+    }
+
     return data
 }
 

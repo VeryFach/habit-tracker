@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
+  password_hash VARCHAR(255) DEFAULT 'managed-by-supabase-auth',
   avatar_url TEXT,
   total_points INT DEFAULT 0,
   current_level VARCHAR(50) DEFAULT 'Beginner', -- Beginner, Novice, Intermediate, Advanced, Master
@@ -173,6 +173,12 @@ ALTER TABLE user_badges ENABLE ROW LEVEL SECURITY;
 -- Policies untuk users - users hanya bisa lihat data sendiri
 CREATE POLICY "Users can view own data" ON users
   FOR SELECT USING (auth.uid() = id);
+
+CREATE POLICY "Users can insert own data" ON users
+  FOR INSERT WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can update own data" ON users
+  FOR UPDATE USING (auth.uid() = id);
 
 -- Policies untuk habits - users hanya bisa lihat habit sendiri
 CREATE POLICY "Users can view own habits" ON habits

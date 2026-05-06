@@ -59,9 +59,21 @@ export function useHabitLog(userId: string | null) {
             try {
                 setLoading(true)
 
+                const supabase = createClient()
+                const {
+                    data: { session },
+                } = await supabase.auth.getSession()
+
+                if (!session?.access_token) {
+                    throw new Error('Unauthorized')
+                }
+
                 const response = await fetch('/api/habits/log', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${session.access_token}`,
+                    },
                     body: JSON.stringify({
                         habit_id: habitId,
                         notes,
@@ -76,7 +88,6 @@ export function useHabitLog(userId: string | null) {
                 const data = await response.json()
 
                 // Update logs optimistically
-                const supabase = createClient()
                 const { data: newLog } = await supabase
                     .from('habit_logs')
                     .select('*')

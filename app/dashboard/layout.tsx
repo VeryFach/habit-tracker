@@ -2,7 +2,7 @@
 
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
-import { signOut } from '@/lib/auth'
+import { ensureUserProfile, signOut } from '@/lib/auth'
 import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -29,6 +29,7 @@ export default function DashboardLayout({
           return
         }
 
+        await ensureUserProfile(user)
         setUser(user)
       } catch (error) {
         console.error('Auth check failed:', error)

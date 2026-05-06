@@ -75,7 +75,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                 setFormData({ ...formData, name: e.target.value })
               }
               placeholder="e.g., Morning Exercise"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               required
             />
           </div>
@@ -90,7 +90,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                 setFormData({ ...formData, description: e.target.value })
               }
               placeholder="What's this habit about?"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               rows={3}
             />
           </div>
@@ -105,7 +105,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, category: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
@@ -124,7 +124,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, frequency: e.target.value as any })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               >
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
@@ -148,7 +148,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                     target_count: parseInt(e.target.value),
                   })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               />
             </div>
 
@@ -166,42 +166,72 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
                     points_per_completion: parseInt(e.target.value),
                   })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               />
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Color
-              </label>
-              <input
-                type="color"
-                value={formData.color}
-                onChange={(e) =>
-                  setFormData({ ...formData, color: e.target.value })
-                }
-                className="w-full h-10 rounded-lg border border-gray-300 cursor-pointer"
-              />
-            </div>
+<div className="grid gap-5 sm:grid-cols-2">
+  {/* Color Picker */}
+  <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
+    <label className="block text-sm font-semibold text-gray-700 mb-3">
+      Color
+    </label>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Icon
-              </label>
-              <input
-                type="text"
-                value={formData.icon}
-                onChange={(e) =>
-                  setFormData({ ...formData, icon: e.target.value })
-                }
-                placeholder="Emoji"
-                maxLength={2}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-center text-2xl"
-              />
+    <div className="flex items-center gap-4">
+      <input
+        type="color"
+        value={formData.color}
+        onChange={(e) =>
+          setFormData({ ...formData, color: e.target.value })
+        }
+        className="w-16 h-16 rounded-xl border-2 border-gray-200 cursor-pointer overflow-hidden"
+      />
+
+      <div className="flex-1">
+        <p className="text-sm text-gray-500 mb-1">Selected Color</p>
+        <div className="flex items-center justify-between bg-gray-100 px-3 py-2 rounded-lg">
+          <span className="font-mono text-sm text-gray-700">
+            {formData.color}
+          </span>
+
+          <div
+            className="w-6 h-6 rounded-full border border-gray-300"
+            style={{ backgroundColor: formData.color }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+        {/* Icon Picker */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Icon
+          </label>
+
+          <div className="flex items-center gap-4">
+            <input
+              type="text"
+              value={formData.icon}
+              onChange={(e) =>
+                setFormData({ ...formData, icon: e.target.value })
+              }
+              placeholder="✨"
+              maxLength={2}
+              className="w-20 h-16 text-center text-3xl border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <div className="flex-1">
+              <p className="text-sm text-gray-500 mb-1">Preview</p>
+
+              <div className="flex items-center justify-center h-16 rounded-xl bg-gray-100 border border-dashed border-gray-300 text-4xl">
+                {formData.icon || "😀"}
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
           {error && (
             <p className="text-sm text-red-600">{error}</p>

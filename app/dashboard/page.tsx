@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const [showCreateForm, setShowCreateForm] = useState(false)
 
   const { habits, loading: habitsLoading, createHabit } = useHabits(userId)
-  const { logs, logHabit } = useHabitLog(userId)
+  const { logs, loading: logLoading, logHabit } = useHabitLog(userId)
   const { user } = useUser(userId)
 
   useEffect(() => {
@@ -93,6 +93,7 @@ export default function DashboardPage() {
             habits={todayHabits}
             logs={logs}
             streaks={logs.reduce((acc: any, log) => acc, {})}
+            isLogging={logLoading}
             onLogHabit={logHabit}
             onCreateHabit={() => setShowCreateForm(true)}
           />

@@ -11,6 +11,7 @@ interface HabitListProps {
   habits: Habit[]
   logs: HabitLog[]
   streaks: Record<string, HabitStreak>
+  isLogging?: boolean
   onLogHabit: (habitId: string, notes?: string) => Promise<HabitLogResponse | void>
   onCreateHabit?: () => void
 }
@@ -19,6 +20,7 @@ export function HabitList({
   habits,
   logs,
   streaks,
+  isLogging = false,
   onLogHabit,
   onCreateHabit,
 }: HabitListProps) {
@@ -78,7 +80,7 @@ export function HabitList({
       <QuickLogModal
         isOpen={selectedHabitId !== null}
         habitName={selectedHabitName}
-        isLoading={false}
+        isLoading={isLogging}
         onSubmit={handleLogHabit}
         onClose={() => setSelectedHabitId(null)}
       />

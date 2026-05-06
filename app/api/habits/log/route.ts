@@ -4,10 +4,21 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(request: NextRequest) {
     try {
         const supabase = await getServerClient()
+        const authHeader = request.headers.get('authorization')
+        const accessToken = authHeader?.startsWith('Bearer ')
+            ? authHeader.slice('Bearer '.length)
+            : null
+
+        if (!accessToken) {
+            return NextResponse.json(
+                { error: 'Unauthorized' },
+                { status: 401 }
+            )
+        }
 
         const {
             data: { user },
-        } = await supabase.auth.getUser()
+        } = await supabase.auth.getUser(accessToken)
 
         if (!user) {
             return NextResponse.json(
