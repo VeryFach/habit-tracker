@@ -17,7 +17,7 @@ export function Header({ userName, totalPoints, onLogout }: HeaderProps) {
           <Link href="/dashboard" className="flex min-w-0 items-center gap-2">
             <span className="text-2xl">🎯</span>
             <span className="truncate text-lg font-bold text-gray-900 sm:text-xl">
-              Habit Tracker
+              CivFit
             </span>
           </Link>
 
