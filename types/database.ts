@@ -116,6 +116,36 @@ export interface LeaderboardSnapshot {
   created_at: string
 }
 
+type SupabaseRow<Row> = Row & Record<string, unknown>
+
+type TableDefinition<Row> = {
+  Row: SupabaseRow<Row>
+  Insert: Partial<SupabaseRow<Row>>
+  Update: Partial<SupabaseRow<Row>>
+  Relationships: []
+}
+
+export interface Database {
+  public: {
+    Tables: {
+      users: TableDefinition<User>
+      habits: TableDefinition<Habit>
+      habit_logs: TableDefinition<HabitLog>
+      habit_streaks: TableDefinition<HabitStreak>
+      badges: TableDefinition<Badge>
+      user_badges: TableDefinition<UserBadge>
+      weekly_progress: TableDefinition<WeeklyProgress>
+      points_history: TableDefinition<PointsHistory>
+      categories: TableDefinition<Category>
+      leaderboard_snapshots: TableDefinition<LeaderboardSnapshot>
+    }
+    Views: {}
+    Functions: {}
+    Enums: {}
+    CompositeTypes: {}
+  }
+}
+
 // API Response types
 export interface ApiResponse<T> {
   success: boolean

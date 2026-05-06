@@ -58,11 +58,11 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="px-4 py-4 sm:px-6">
         <CardTitle>Create New Habit</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-4 py-4 sm:px-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -95,7 +95,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Category *
@@ -133,7 +133,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Target Count *
@@ -171,7 +171,7 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Color
@@ -207,11 +207,11 @@ export function CreateHabitForm({ onSubmit, onCancel }: CreateHabitFormProps) {
             <p className="text-sm text-red-600">{error}</p>
           )}
 
-          <div className="flex gap-2 justify-end pt-4">
-            <Button variant="ghost" onClick={onCancel} disabled={loading}>
+          <div className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end">
+            <Button variant="ghost" onClick={onCancel} disabled={loading} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button variant="primary" type="submit" isLoading={loading}>
+            <Button variant="primary" type="submit" isLoading={loading} className="w-full sm:w-auto">
               Create Habit
             </Button>
           </div>

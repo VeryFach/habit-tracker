@@ -2,6 +2,13 @@ import { getServerClient } from '@/lib/supabase'
 import type { Habit } from '@/types/database'
 import { NextRequest, NextResponse } from 'next/server'
 
+const HABIT_FREQUENCIES = ['daily', 'weekly', 'monthly'] as const
+type HabitFrequency = (typeof HABIT_FREQUENCIES)[number]
+
+function isHabitFrequency(value: string | null): value is HabitFrequency {
+    return HABIT_FREQUENCIES.includes(value as HabitFrequency)
+}
+
 export async function GET(request: NextRequest) {
     try {
         const supabase = await getServerClient()
@@ -27,7 +34,7 @@ export async function GET(request: NextRequest) {
             .eq('is_active', true)
             .order('created_at', { ascending: false })
 
-        if (frequency) {
+        if (isHabitFrequency(frequency)) {
             query = query.eq('frequency', frequency)
         }
 
@@ -61,13 +68,14 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json()
+        const frequency = isHabitFrequency(body.frequency) ? body.frequency : 'daily'
 
         const habitData: Omit<Habit, 'id' | 'created_at' | 'updated_at'> = {
             user_id: user.id,
             name: body.name,
             description: body.description,
             category: body.category,
-            frequency: body.frequency || 'daily',
+            frequency,
             target_count: body.target_count || 1,
             points_per_completion: body.points_per_completion || 10,
             color: body.color || '#FF6B6B',

@@ -4,6 +4,12 @@ import { createClient } from '@/lib/supabase'
 import type { Habit } from '@/types/database'
 import { useCallback, useEffect, useState } from 'react'
 
+function getTodayDateString() {
+    const today = new Date()
+    const timezoneOffset = today.getTimezoneOffset() * 60000
+    return new Date(today.getTime() - timezoneOffset).toISOString().split('T')[0]
+}
+
 export function useHabits(userId: string | null) {
     const [habits, setHabits] = useState<Habit[]>([])
     const [loading, setLoading] = useState(true)
@@ -72,6 +78,7 @@ export function useHabits(userId: string | null) {
                     .insert({
                         ...habitData,
                         user_id: userId,
+                        start_date: habitData.start_date || getTodayDateString(),
                     })
                     .select()
 
@@ -100,6 +107,8 @@ export function useHabits(userId: string | null) {
 
     const updateHabit = useCallback(
         async (habitId: string, updates: Partial<Habit>) => {
+            if (!userId) throw new Error('No user ID')
+
             try {
                 const supabase = createClient()
                 const { data, error: err } = await supabase
@@ -128,6 +137,8 @@ export function useHabits(userId: string | null) {
 
     const deleteHabit = useCallback(
         async (habitId: string) => {
+            if (!userId) throw new Error('No user ID')
+
             try {
                 const supabase = createClient()
                 const { error: err } = await supabase

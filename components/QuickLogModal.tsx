@@ -36,13 +36,13 @@ export function QuickLogModal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Log Habit: {habitName}</CardTitle>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-50 p-3 sm:items-center sm:p-4">
+      <Card className="max-h-[calc(100vh-1.5rem)] w-full max-w-md overflow-y-auto">
+        <CardHeader className="px-4 py-4 sm:px-6">
+          <CardTitle className="text-base sm:text-lg">Log Habit: {habitName}</CardTitle>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-4 py-4 sm:px-6">
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -61,11 +61,12 @@ export function QuickLogModal({
               <p className="text-sm text-red-600">{error}</p>
             )}
 
-            <div className="flex gap-2 justify-end">
+            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
               <Button
                 variant="ghost"
                 onClick={onClose}
                 disabled={isLoading}
+                className="w-full sm:w-auto"
               >
                 Cancel
               </Button>
@@ -73,6 +74,7 @@ export function QuickLogModal({
                 variant="primary"
                 onClick={handleSubmit}
                 isLoading={isLoading}
+                className="w-full sm:w-auto"
               >
                 Log Habit
               </Button>

@@ -36,12 +36,12 @@ export function ProgressCard({ user }: ProgressCardProps) {
 
   return (
     <Card>
-      <CardContent className="p-6">
-        <div className="grid grid-cols-2 gap-6">
+      <CardContent className="p-5 sm:p-6">
+        <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
           {/* Points */}
           <div>
             <p className="text-sm text-gray-500 mb-2">Total Points</p>
-            <p className="text-3xl font-bold text-gray-900">{user.total_points}</p>
+            <p className="text-2xl font-bold text-gray-900 sm:text-3xl">{user.total_points}</p>
           </div>
 
           {/* Level */}
@@ -63,8 +63,8 @@ export function ProgressCard({ user }: ProgressCardProps) {
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-6">
-          <div className="flex justify-between items-center mb-2">
+        <div className="mt-5 sm:mt-6">
+          <div className="mb-2 flex items-center justify-between gap-3">
             <p className="text-sm font-medium text-gray-700">Progress to Next Level</p>
             <p className="text-sm text-gray-500">{levelProgress}%</p>
           </div>

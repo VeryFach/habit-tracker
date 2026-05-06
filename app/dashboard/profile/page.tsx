@@ -56,7 +56,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 sm:space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">👤 Profile</h1>
       </div>
@@ -66,10 +66,10 @@ export default function ProfilePage() {
         <CardHeader>
           <CardTitle>Account Information</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-4 py-4 sm:px-6">
           <div>
             <p className="text-sm text-gray-500">Email</p>
-            <p className="font-medium text-gray-900">{user.email}</p>
+            <p className="break-all font-medium text-gray-900">{user.email}</p>
           </div>
 
           <div>
@@ -90,18 +90,20 @@ export default function ProfilePage() {
             )}
           </div>
 
-          <div className="flex justify-between items-center pt-4">
+          <div className="flex items-center pt-4 sm:justify-between">
             {editing ? (
-              <div className="flex gap-2">
+              <div className="flex w-full flex-col-reverse gap-2 sm:w-auto sm:flex-row">
                 <Button
                   variant="ghost"
                   onClick={() => setEditing(false)}
+                  className="w-full sm:w-auto"
                 >
                   Cancel
                 </Button>
                 <Button
                   variant="primary"
                   onClick={handleSave}
+                  className="w-full sm:w-auto"
                 >
                   Save Changes
                 </Button>
@@ -110,6 +112,7 @@ export default function ProfilePage() {
               <Button
                 variant="secondary"
                 onClick={() => setEditing(true)}
+                className="w-full sm:w-auto"
               >
                 Edit Profile
               </Button>
@@ -123,8 +126,8 @@ export default function ProfilePage() {
         <CardHeader>
           <CardTitle>Statistics</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-3 gap-4">
+        <CardContent className="px-4 py-4 sm:px-6">
+          <div className="grid gap-4 sm:grid-cols-3">
             <div className="text-center">
               <p className="text-2xl font-bold text-blue-600">
                 {user.total_points}

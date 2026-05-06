@@ -46,7 +46,7 @@ export default function WeeklyPage() {
   const weeklyHabits = habits.filter((h) => h.frequency === 'weekly')
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">📊 Weekly Progress</h1>
         <p className="text-gray-600">Track your habits for this week</p>
@@ -54,7 +54,7 @@ export default function WeeklyPage() {
 
       {loading ? (
         <Card>
-          <CardContent className="p-8 text-center text-gray-500">
+          <CardContent className="p-6 text-center text-gray-500 sm:p-8">
             Loading progress data...
           </CardContent>
         </Card>
@@ -84,7 +84,7 @@ export default function WeeklyPage() {
                 <p className="text-sm font-medium text-gray-700">
                   Overall Weekly Completion
                 </p>
-                <p className="text-3xl font-bold text-blue-600 mt-2">
+                <p className="mt-2 text-2xl font-bold text-blue-600 sm:text-3xl">
                   {progressData.total_completion}%
                 </p>
               </CardContent>

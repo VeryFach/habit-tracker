@@ -16,17 +16,17 @@ export function ProgressBar({ completed, target, label, icon = '📊' }: Progres
   return (
     <Card>
       <CardContent className="p-4">
-        <div className="flex items-start justify-between mb-3">
-          <div>
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <div className="min-w-0">
             <p className="text-sm font-medium text-gray-900 flex items-center gap-2">
               <span>{icon}</span>
-              {label}
+              <span className="truncate">{label}</span>
             </p>
             <p className="text-xs text-gray-500 mt-1">
               {completed} / {target} completed
             </p>
           </div>
-          <p className="text-lg font-bold text-gray-900">{percentage}%</p>
+          <p className="shrink-0 text-lg font-bold text-gray-900">{percentage}%</p>
         </div>
 
         <div className="w-full bg-gray-200 rounded-full h-2">

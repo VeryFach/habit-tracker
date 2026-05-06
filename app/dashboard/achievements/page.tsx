@@ -37,7 +37,7 @@ export default function AchievementsPage() {
   }))
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">🏆 Achievements</h1>
         <p className="text-gray-600">Unlock badges and earn rewards</p>
@@ -45,18 +45,18 @@ export default function AchievementsPage() {
 
       {/* Stats */}
       <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-        <CardContent className="p-6">
-          <div className="grid grid-cols-3 gap-4 text-center">
+        <CardContent className="p-4 sm:p-6">
+          <div className="grid grid-cols-3 gap-2 text-center sm:gap-4">
             <div>
-              <p className="text-3xl font-bold">{unlockedBadges.length}</p>
+              <p className="text-2xl font-bold sm:text-3xl">{unlockedBadges.length}</p>
               <p className="text-sm opacity-90">Unlocked</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">{allBadges.length}</p>
+              <p className="text-2xl font-bold sm:text-3xl">{allBadges.length}</p>
               <p className="text-sm opacity-90">Total</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">
+              <p className="text-2xl font-bold sm:text-3xl">
                 {Math.round(
                   (unlockedBadges.length / allBadges.length) * 100 || 0
                 )}%
@@ -70,12 +70,12 @@ export default function AchievementsPage() {
       {/* Badges Grid */}
       {loading ? (
         <Card>
-          <CardContent className="p-8 text-center text-gray-500">
+          <CardContent className="p-6 text-center text-gray-500 sm:p-8">
             Loading achievements...
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4">
           {badgesWithProgress.map((badge) => (
             <AchievementCard key={badge.id} badge={badge} />
           ))}

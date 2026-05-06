@@ -34,12 +34,12 @@ export function HabitCard({
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-4">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-2xl">{habit.icon}</span>
-              <div>
-                <h4 className="font-semibold text-gray-900">{habit.name}</h4>
+              <div className="min-w-0">
+                <h4 className="truncate font-semibold text-gray-900">{habit.name}</h4>
                 <p className="text-sm text-gray-500">
                   {habit.category} • {habit.points_per_completion} pts
                 </p>
@@ -53,9 +53,9 @@ export function HabitCard({
             )}
           </div>
 
-          <div className="text-right">
+          <div className="shrink-0 text-right">
             <div
-              className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-lg font-bold sm:h-12 sm:w-12"
               style={{
                 backgroundColor: habit.color + '20',
                 color: habit.color,
@@ -66,7 +66,7 @@ export function HabitCard({
           </div>
         </div>
 
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row">
           <Button
             variant={isCompletedToday ? 'secondary' : 'primary'}
             size="sm"

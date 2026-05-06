@@ -42,12 +42,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       {/* Daily Mission Section */}
       <Card>
-        <CardContent className="p-8 text-center">
+        <CardContent className="p-5 text-center sm:p-8">
           <p className="text-4xl mb-4">🎯</p>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl">
             One Day, One Mission
           </h2>
           <p className="text-gray-600 mb-4">What's yours today?</p>
@@ -84,7 +84,7 @@ export default function DashboardPage() {
         <h2 className="text-xl font-bold text-gray-900 mb-4">📅 Today's Habits</h2>
         {habitsLoading ? (
           <Card>
-            <CardContent className="p-8 text-center text-gray-500">
+            <CardContent className="p-6 text-center text-gray-500 sm:p-8">
               Loading habits...
             </CardContent>
           </Card>
