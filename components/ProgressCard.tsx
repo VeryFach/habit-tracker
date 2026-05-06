@@ -9,42 +9,42 @@ interface ProgressCardProps {
 }
 
 function getLevelInfo(points: number) {
-  if (points < 10) {
+  if (points < 100) {
     return {
       level: 'Beginner',
       min: 0,
-      max: 10,
-    }
-  }
-
-  if (points < 50) {
-    return {
-      level: 'Novice',
-      min: 10,
-      max: 50,
-    }
-  }
-
-  if (points < 100) {
-    return {
-      level: 'Intermediate',
-      min: 50,
       max: 100,
     }
   }
 
-  if (points < 300) {
+  if (points < 500) {
+    return {
+      level: 'Novice',
+      min: 100,
+      max: 500,
+    }
+  }
+
+  if (points < 1000) {
+    return {
+      level: 'Intermediate',
+      min: 500,
+      max: 1000,
+    }
+  }
+
+  if (points < 3000) {
     return {
       level: 'Advanced',
-      min: 100,
-      max: 300,
+      min: 1000,
+      max: 3000,
     }
   }
 
   return {
     level: 'Master',
-    min: 300,
-    max: 300,
+    min: 3000,
+    max: 3000,
   }
 }
 
