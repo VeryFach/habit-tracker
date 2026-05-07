@@ -16,7 +16,7 @@ type MainTab = 'reality' | 'city'
 type CityTab = 'visualization' | 'map' | 'scene' | 'buildings' | 'bank' | 'temple'
 type HabitModalMode = 'create' | 'edit' | null
 
-type BuildingKey = 'house' | 'farm' | 'taxOffice' | 'restaurant' | 'cloneCenter'
+type BuildingKey = 'house' | 'farm' | 'taxOffice' | 'restaurant' | 'cloneCenter' | 'coffeeShop'
 type HabitFormPayload = Pick<
   Habit,
   | 'name'
@@ -48,6 +48,7 @@ interface CivFitState {
   unlockedBadges: string[]
   history: string[]
   lastEvaluatedDate: string | null
+  lastGachaSpinDate: string | null
 }
 
 interface BuildingDefinition {
@@ -88,6 +89,12 @@ const BUILDINGS: BuildingDefinition[] = [
     description: 'Menggandakan 1 warga per kelipatan 3 populasi.',
     baseCost: 140,
   },
+  {
+    key: 'coffeeShop',
+    name: 'Kafe Kopi',
+    description: 'Meningkatkan mood & produktivitas warga.',
+    baseCost: 60,
+  },
 ]
 
 const BADGES = [
@@ -96,6 +103,13 @@ const BADGES = [
   { id: 'iron-discipline', name: 'Disiplin Besi', requirement: 450 },
   { id: 'gold-rhythm', name: 'Ritme Emas', requirement: 700 },
   { id: 'civilization-core', name: 'Inti Peradaban', requirement: 1000 },
+]
+
+const GACHA_REWARDS = [
+  { name: 'Zonk Murni', silverReward: 0, prob: 0.1, type: 'loss' },
+  { name: 'Receh Kembali', silverReward: 8, prob: 0.45, type: 'small' },
+  { name: 'Hadiah Sedang', silverReward: 28, prob: 0.35, type: 'medium' },
+  { name: 'Jackpot Kota', silverReward: 70, prob: 0.1, type: 'jackpot' },
 ]
 
 function createInitialState(): CivFitState {
@@ -119,11 +133,13 @@ function createInitialState(): CivFitState {
       taxOffice: 0,
       restaurant: 0,
       cloneCenter: 0,
+      coffeeShop: 0,
     },
     completions: {},
     unlockedBadges: [],
     history: ['CivFit v1.7 started. Realita and Kota are now separated.'],
     lastEvaluatedDate: null,
+    lastGachaSpinDate: null,
   }
 }
 
@@ -903,7 +919,7 @@ export default function DashboardPage() {
                 <div className="rounded-lg border border-gray-200 p-4">
                   <p className="text-sm text-gray-500">Kurs hari ini</p>
                   <p className="mt-1 text-2xl font-bold text-gray-900">
-                    1 Gold = {state.exchangeRate} Silver
+                    1 Gold🪙= {state.exchangeRate} Silver🥈
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Kurs naik jika semua habit aman saat evaluasi, turun jika
