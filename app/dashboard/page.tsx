@@ -1,7 +1,10 @@
 'use client'
 
+import AnimatedCityScene from '@/components/AnimatedCityScene'
+import BuildingMap from '@/components/BuildingMap'
 import { Button } from '@/components/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/Card'
+import CityVisualization from '@/components/CityVisualization'
 import { useHabitLog } from '@/hooks/useHabitLog'
 import { useHabits } from '@/hooks/useHabits'
 import { createClient } from '@/lib/supabase'
@@ -10,7 +13,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CreateHabitForm } from './components/CreateHabitForm'
 
 type MainTab = 'reality' | 'city'
-type CityTab = 'buildings' | 'bank' | 'temple'
+type CityTab = 'visualization' | 'map' | 'scene' | 'buildings' | 'bank' | 'temple'
 type HabitModalMode = 'create' | 'edit' | null
 
 type BuildingKey = 'house' | 'farm' | 'taxOffice' | 'restaurant' | 'cloneCenter'
@@ -785,9 +788,12 @@ export default function DashboardPage() {
 
           <div className="flex flex-wrap gap-2">
             {[
-              ['buildings', 'Toko Kota'],
-              ['bank', 'Bank'],
-              ['temple', 'Kuil'],
+              ['visualization', '🏙️ Panorama'],
+              ['map', '🗺️ Peta'],
+              ['scene', '🎬 Animasi'],
+              ['buildings', '🏬 Toko Kota'],
+              ['bank', '🏦 Bank'],
+              ['temple', '⛩️ Kuil'],
             ].map(([id, label]) => (
               <Button
                 key={id}
@@ -798,6 +804,36 @@ export default function DashboardPage() {
               </Button>
             ))}
           </div>
+
+          {cityTab === 'visualization' && (
+            <CityVisualization
+              population={state.population}
+              healthyPopulation={healthyPopulation}
+              sick={state.sick}
+              food={state.food}
+              housing={state.housing}
+              level={state.level}
+              buildings={state.buildings}
+            />
+          )}
+
+          {cityTab === 'map' && (
+            <BuildingMap
+              buildings={state.buildings}
+              population={state.population}
+              level={state.level}
+            />
+          )}
+
+          {cityTab === 'scene' && (
+            <AnimatedCityScene
+              population={state.population}
+              healthyPopulation={healthyPopulation}
+              sick={state.sick}
+              buildings={state.buildings}
+              level={state.level}
+            />
+          )}
 
           {cityTab === 'buildings' && (
             <Card>
