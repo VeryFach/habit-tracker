@@ -1,7 +1,10 @@
 // Export components
 export { AchievementCard } from './AchievementCard'
+export { default as AnimatedCityScene } from './AnimatedCityScene'
+export { default as BuildingMap } from './BuildingMap'
 export { Button } from './Button'
 export { Card, CardContent, CardFooter, CardHeader, CardTitle } from './Card'
+export { default as CityVisualization } from './CityVisualization'
 export { HabitCard } from './HabitCard'
 export { HabitList } from './HabitList'
 export { Header } from './Header'
