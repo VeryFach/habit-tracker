@@ -1,5 +1,6 @@
-import { createClient } from './supabase'
+import type { User as ProfileUser } from '@/types/database'
 import type { User as SupabaseAuthUser } from '@supabase/supabase-js'
+import { createClient } from './supabase'
 
 function getProfileUsername(authUser: SupabaseAuthUser, username?: string) {
     const metadataUsername = authUser.user_metadata?.username
@@ -119,7 +120,7 @@ export async function getUserProfile(userId: string) {
 
 export async function updateUserProfile(
     userId: string,
-    updates: Partial<any>
+    updates: Partial<ProfileUser>
 ) {
     const supabase = createClient()
     const { data, error } = await supabase

@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 function loadEnvFile(fileName) {
@@ -119,7 +119,8 @@ try {
         process.exit(1)
     }
 
-    const { password_hash, ...profileWithoutPasswordHash } = profile
+    const profileWithoutPasswordHash = { ...profile }
+    delete profileWithoutPasswordHash.password_hash
     try {
         await supabaseRequest('/rest/v1/users?on_conflict=id', {
             method: 'POST',

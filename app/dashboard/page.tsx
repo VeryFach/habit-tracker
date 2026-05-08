@@ -5,6 +5,7 @@ import BuildingMap from '@/components/BuildingMap'
 import { Button } from '@/components/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/Card'
 import CityVisualization from '@/components/CityVisualization'
+import { useCivFitConfig } from '@/hooks/useCivFitConfig'
 import { useHabitLog } from '@/hooks/useHabitLog'
 import { useHabits } from '@/hooks/useHabits'
 import { createClient } from '@/lib/supabase'
@@ -58,6 +59,21 @@ interface BuildingDefinition {
   baseCost: number
 }
 
+const BADGES = [
+  { id: 'steady-start', name: 'Langkah Awal', requirement: 100 },
+  { id: 'city-founder', name: 'Pendiri Kota', requirement: 250 },
+  { id: 'iron-discipline', name: 'Disiplin Besi', requirement: 450 },
+  { id: 'gold-rhythm', name: 'Ritme Emas', requirement: 700 },
+  { id: 'civilization-core', name: 'Inti Peradaban', requirement: 1000 },
+]
+
+const GACHA_REWARDS = [
+  { name: 'Zonk Murni', silverReward: 0, prob: 0.1, type: 'loss' },
+  { name: 'Receh Kembali', silverReward: 8, prob: 0.45, type: 'small' },
+  { name: 'Hadiah Sedang', silverReward: 28, prob: 0.35, type: 'medium' },
+  { name: 'Jackpot Kota', silverReward: 70, prob: 0.1, type: 'jackpot' },
+]
+
 const BUILDINGS: BuildingDefinition[] = [
   {
     key: 'house',
@@ -95,21 +111,6 @@ const BUILDINGS: BuildingDefinition[] = [
     description: 'Meningkatkan mood & produktivitas warga.',
     baseCost: 60,
   },
-]
-
-const BADGES = [
-  { id: 'steady-start', name: 'Langkah Awal', requirement: 100 },
-  { id: 'city-founder', name: 'Pendiri Kota', requirement: 250 },
-  { id: 'iron-discipline', name: 'Disiplin Besi', requirement: 450 },
-  { id: 'gold-rhythm', name: 'Ritme Emas', requirement: 700 },
-  { id: 'civilization-core', name: 'Inti Peradaban', requirement: 1000 },
-]
-
-const GACHA_REWARDS = [
-  { name: 'Zonk Murni', silverReward: 0, prob: 0.1, type: 'loss' },
-  { name: 'Receh Kembali', silverReward: 8, prob: 0.45, type: 'small' },
-  { name: 'Hadiah Sedang', silverReward: 28, prob: 0.35, type: 'medium' },
-  { name: 'Jackpot Kota', silverReward: 70, prob: 0.1, type: 'jackpot' },
 ]
 
 function createInitialState(): CivFitState {
@@ -234,6 +235,14 @@ export default function DashboardPage() {
     deleteHabit,
   } = useHabits(userId)
   const { logs, loading: logLoading, logHabit } = useHabitLog(userId)
+  const { buildings: configBuildings, gacha: configGacha, badges: configBadges, loading: configLoading } = useCivFitConfig()
+
+  const buildingsSource =
+    configLoading || configBuildings.length === 0 ? BUILDINGS : configBuildings
+  const gachaSource =
+    configLoading || configGacha.length === 0 ? GACHA_REWARDS : configGacha
+  const badgeSource =
+    configLoading || configBadges.length === 0 ? BADGES : configBadges
 
   const today = useMemo(() => new Date(), [])
   const todayKey = getLocalDateString(today)
@@ -400,7 +409,7 @@ export default function DashboardPage() {
         2,
         Math.min(7, Number((prev.exchangeRate + (completionRatio === 1 ? 0.4 : -0.5)).toFixed(1)))
       )
-      const newlyUnlocked = BADGES.filter(
+      const newlyUnlocked = badgeSource.filter(
         (badge) =>
           nextHp > 0 &&
           prev.exp >= badge.requirement &&
@@ -521,15 +530,14 @@ export default function DashboardPage() {
     let silverReward = 0
     let text = 'Zonk murni.'
 
-    if (roll >= 0.1 && roll < 0.55) {
-      silverReward = 8
-      text = 'Receh kembali.'
-    } else if (roll >= 0.55 && roll < 0.9) {
-      silverReward = 28
-      text = 'Hadiah sedang.'
-    } else if (roll >= 0.9) {
-      silverReward = 70
-      text = 'Jackpot kota.'
+    let cumulativeProbability = 0
+    for (const reward of gachaSource) {
+      cumulativeProbability += reward.prob
+      if (roll < cumulativeProbability) {
+        silverReward = reward.silverReward
+        text = reward.name
+        break
+      }
     }
 
     setState((prev) => ({
@@ -874,7 +882,7 @@ export default function DashboardPage() {
                 </Button>
               </CardHeader>
               <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {BUILDINGS.map((building) => {
+                {buildingsSource.map((building) => {
                   const owned = state.buildings[building.key]
                   const cost = calculateBuildingCost(building, owned)
 

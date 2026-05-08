@@ -205,7 +205,7 @@ export default function CityVisualization({
         <div className="space-y-5">
             {/* Civilization Level */}
             <div
-                className={`rounded-lg bg-gradient-to-r ${civ.bgGradient} p-6 text-white shadow-lg`}
+                className={`rounded-lg bg-linear-to-r ${civ.bgGradient} p-6 text-white shadow-lg`}
             >
                 <div className="flex items-start justify-between">
                     <div>

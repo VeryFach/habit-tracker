@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     // Get current week
     const today = new Date()
-    let dateFrom = new Date()
+    const dateFrom = new Date()
 
     if (period === 'daily') {
       dateFrom.setHours(0, 0, 0, 0)
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
 
     // Group logs by habit_id on client
     const logsByHabit: Record<string, number> = {}
-    ;(logs || []).forEach((log: any) => {
+    ;(logs || []).forEach((log: { habit_id: string }) => {
       logsByHabit[log.habit_id] = (logsByHabit[log.habit_id] || 0) + 1
     })
 
@@ -80,8 +80,10 @@ export async function GET(request: NextRequest) {
       period,
       progress,
       total_completion: Math.round(
-        progress.reduce((a, p) => a + p.completion_percentage, 0) /
-          progress.length
+        progress.length > 0
+          ? progress.reduce((a, p) => a + p.completion_percentage, 0) /
+              progress.length
+          : 0
       ),
     })
   } catch (error) {

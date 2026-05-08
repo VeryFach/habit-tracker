@@ -17,7 +17,6 @@ export function useHabits(userId: string | null) {
 
     useEffect(() => {
         if (!userId) {
-            setLoading(false)
             return
         }
 
@@ -168,7 +167,7 @@ export function useHabits(userId: string | null) {
 
     return {
         habits,
-        loading,
+        loading: userId ? loading : false,
         error,
         createHabit,
         updateHabit,

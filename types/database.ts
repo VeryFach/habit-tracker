@@ -116,6 +116,25 @@ export interface LeaderboardSnapshot {
   created_at: string
 }
 
+// CivFit configuration tables
+export interface GachaReward {
+  id: string
+  name: string
+  silver_reward: number
+  probability: number
+  reward_type: string
+  created_at: string
+}
+
+export interface BuildingConfig {
+  id: string
+  building_key: string
+  name: string
+  description?: string
+  base_cost: number
+  created_at: string
+}
+
 type SupabaseRow<Row> = Row & Record<string, unknown>
 
 type TableDefinition<Row> = {
@@ -138,11 +157,13 @@ export interface Database {
       points_history: TableDefinition<PointsHistory>
       categories: TableDefinition<Category>
       leaderboard_snapshots: TableDefinition<LeaderboardSnapshot>
+      gacha_rewards: TableDefinition<GachaReward>
+      building_configs: TableDefinition<BuildingConfig>
     }
-    Views: {}
-    Functions: {}
-    Enums: {}
-    CompositeTypes: {}
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }
 

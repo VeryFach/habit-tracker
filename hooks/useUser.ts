@@ -11,7 +11,6 @@ export function useUser(userId: string | null) {
 
     useEffect(() => {
         if (!userId) {
-            setLoading(false)
             return
         }
 
@@ -87,7 +86,7 @@ export function useUser(userId: string | null) {
         [userId]
     )
 
-    return { user, loading, error, updateProfile }
+    return { user, loading: userId ? loading : false, error, updateProfile }
 }
 
 export function useProgress(userId: string | null) {
@@ -97,7 +96,6 @@ export function useProgress(userId: string | null) {
 
     useEffect(() => {
         if (!userId) {
-            setLoading(false)
             return
         }
 
@@ -131,5 +129,5 @@ export function useProgress(userId: string | null) {
         fetchProgress()
     }, [userId])
 
-    return { weeklyProgress, loading, error }
+    return { weeklyProgress, loading: userId ? loading : false, error }
 }
