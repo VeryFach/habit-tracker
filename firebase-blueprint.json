@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with game stats and city state",
+      "type": "object",
+      "properties": {
+        "stats": {
+          "type": "object",
+          "description": "Game level, currency, and survival stats"
+        },
+        "city": {
+          "type": "object",
+          "description": "City meta stats and era"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["stats", "city", "updatedAt"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "Real-world habit to track",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["daily", "weekly", "monthly"] },
+        "completedDates": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "targetCount": { "type": "number" },
+        "goldReward": { "type": "number" },
+        "expReward": { "type": "number" },
+        "difficulty": { "type": "number" },
+        "currentStreak": { "type": "number" }
+      },
+      "required": ["title", "type", "completedDates", "createdAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Log of actions and events",
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["habit", "city", "economy", "system"] },
+        "message": { "type": "string" },
+        "change": { "type": "number" },
+        "unit": { "type": "string", "enum": ["hp", "gold", "silver", "exp", "pop"] }
+      },
+      "required": ["timestamp", "type", "message"]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Denormalized user data for public rankings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "level": { "type": "number" },
+        "population": { "type": "number" },
+        "currentEra": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "displayName", "level", "population", "currentEra", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Store user base stats and city overview"
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "Individual habits per user"
+    },
+    "/users/{userId}/logs/{logId}": {
+      "schema": "ActivityLog",
+      "description": "Activity history per user"
+    },
+    "/leaderboard/{userId}": {
+      "schema": "LeaderboardEntry",
+      "description": "Public ranking data"
+    }
+  }
+}

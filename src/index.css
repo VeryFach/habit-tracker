@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-brand-bg: #FDF6E3;
+  --color-brand-dark: #2D3436;
+  --color-brand-red: #FF6B6B;
+  --color-brand-teal: #4ECDC4;
+  --color-brand-yellow: #FFE66D;
+  --color-brand-purple: #A29BFE;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-brand-bg text-brand-dark overflow-x-hidden selection:bg-brand-teal/30;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.neo-shadow-sm {
+  @apply shadow-[2px_2px_0_0_#2D3436];
+}
+
+.neo-shadow {
+  @apply shadow-[4px_4px_0_0_#2D3436];
+}
+
+.neo-shadow-lg {
+  @apply shadow-[8px_8px_0_0_#2D3436];
+}
+
+.neo-border {
+  @apply border-2 border-brand-dark;
+}
+
+.neo-border-lg {
+  @apply border-4 border-brand-dark;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
