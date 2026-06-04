@@ -2,16 +2,27 @@
 
 import { Card, CardContent } from '@/components/Card'
 import { ProgressBar } from '@/components/ProgressBar'
-import { useHabits } from '@/hooks/useHabits'
 import { createClient } from '@/lib/supabase'
 import { useEffect, useState } from 'react'
 
+type ProgressItem = {
+  habit_id: string
+  name: string
+  completed_count: number
+  target_count: number
+  completion_percentage: number
+}
+
+type ProgressResponse = {
+  period: string
+  progress: ProgressItem[]
+  total_completion: number
+}
+
 export default function WeeklyPage() {
   const [userId, setUserId] = useState<string | null>(null)
-  const [progressData, setProgressData] = useState<any>(null)
+  const [progressData, setProgressData] = useState<ProgressResponse | null>(null)
   const [loading, setLoading] = useState(true)
-
-  const { habits } = useHabits(userId)
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -43,8 +54,6 @@ export default function WeeklyPage() {
     fetchProgress()
   }, [userId])
 
-  const weeklyHabits = habits.filter((h) => h.frequency === 'weekly')
-
   return (
     <div className="space-y-5 sm:space-y-8">
       <div>
@@ -61,7 +70,7 @@ export default function WeeklyPage() {
       ) : (
         <div className="space-y-4">
           {progressData?.progress && progressData.progress.length > 0 ? (
-            progressData.progress.map((item: any) => (
+            progressData.progress.map((item) => (
               <ProgressBar
                 key={item.habit_id}
                 label={item.name}

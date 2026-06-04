@@ -121,7 +121,7 @@ export default function BuildingMap({
             </CardHeader>
             <CardContent className="space-y-6">
                 {/* City Grid */}
-                <div className="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-lg border-2 border-green-200">
+                <div className="bg-linear-to-br from-green-50 to-blue-50 p-6 rounded-lg border-2 border-green-200">
                     <div
                         style={{
                             display: 'grid',
@@ -137,7 +137,7 @@ export default function BuildingMap({
                                     title={`${cell.building.name} #${cell.count}`}
                                 >
                                     <div className="text-2xl">{cell.building.icon}</div>
-                                    <div className="text-xs font-bold text-gray-700 mt-1 group-hover:block hidden absolute bg-gray-900 text-white rounded px-2 py-1 whitespace-nowrap z-10">
+                                    <div className="text-xs font-bold mt-1 group-hover:block hidden absolute bg-gray-900 text-white rounded px-2 py-1 whitespace-nowrap z-10">
                                         {cell.building.name}
                                     </div>
                                     <span className="text-xs font-bold text-gray-600 absolute bottom-1 right-1">
@@ -194,15 +194,15 @@ export default function BuildingMap({
                 <div className="border-t pt-6">
                     <h3 className="font-semibold text-gray-900 mb-3">Statistik Kota</h3>
                     <div className="grid grid-cols-3 gap-2 text-center">
-                        <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-3 rounded-lg">
+                        <div className="bg-linear-to-br from-blue-100 to-blue-50 p-3 rounded-lg">
                             <p className="text-2xl font-bold text-blue-600">{totalBuildings}</p>
                             <p className="text-xs text-gray-600 mt-1">Total Bangunan</p>
                         </div>
-                        <div className="bg-gradient-to-br from-green-100 to-green-50 p-3 rounded-lg">
+                        <div className="bg-linear-to-br from-green-100 to-green-50 p-3 rounded-lg">
                             <p className="text-2xl font-bold text-green-600">{maxCapacity}</p>
                             <p className="text-xs text-gray-600 mt-1">Kapasitas</p>
                         </div>
-                        <div className="bg-gradient-to-br from-purple-100 to-purple-50 p-3 rounded-lg">
+                        <div className="bg-linear-to-br from-purple-100 to-purple-50 p-3 rounded-lg">
                             <p className="text-2xl font-bold text-purple-600">
                                 {Math.max(0, maxCapacity - population)}
                             </p>

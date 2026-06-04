@@ -44,7 +44,7 @@ export default function AchievementsPage() {
       </div>
 
       {/* Stats */}
-      <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <Card className="bg-linear-to-r from-blue-500 to-purple-600 text-white">
         <CardContent className="p-4 sm:p-6">
           <div className="grid grid-cols-3 gap-2 text-center sm:gap-4">
             <div>

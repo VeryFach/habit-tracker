@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/Card'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
 interface AnimatedCitySceneProps {
     population: number
@@ -18,24 +18,23 @@ export default function AnimatedCityScene({
     buildings,
     level,
 }: AnimatedCitySceneProps) {
-    const [floatingEmojis, setFloatingEmojis] = useState<
-        Array<{ id: number; emoji: string; x: number; y: number }>
-    >([])
-
-    // Generate random floating emojis untuk animasi kehidupan kota
-    useEffect(() => {
+    const floatingEmojis = useMemo(() => {
         const emojis = ['👤', '🐕', '🦋', '☀️', '🌙', '⭐']
+        const count = Math.min(population, 8)
 
-        // Buat floating emojis berdasarkan populasi dan bangunan
-        const newEmojis = Array.from({ length: Math.min(population, 8) }, (_, i) => ({
+        // Deterministic pseudo-random without mutation.
+        const rand01 = (n: number) => {
+            const x = Math.sin(n) * 10000
+            return x - Math.floor(x)
+        }
+
+        return Array.from({ length: count }, (_, i) => ({
             id: i,
             emoji: emojis[i % emojis.length],
-            x: Math.random() * 100,
-            y: Math.random() * 100,
+            x: rand01((population + 1) * 101 + (level + 1) * 17 + i * 3) * 100,
+            y: rand01((population + 1) * 203 + (level + 1) * 29 + i * 7) * 100,
         }))
-
-        setFloatingEmojis(newEmojis)
-    }, [population])
+    }, [population, level])
 
     const totalBuildings = Object.values(buildings).reduce((a, b) => a + b, 0)
     const housesPercentage = ((buildings.house || 0) / Math.max(1, totalBuildings)) * 100
@@ -52,15 +51,15 @@ export default function AnimatedCityScene({
             </CardHeader>
             <CardContent>
                 {/* Animated scene container */}
-                <div className="relative w-full h-64 bg-gradient-to-b from-blue-100 to-green-100 rounded-lg overflow-hidden border-2 border-green-300 mb-6">
+                <div className="relative w-full h-64 bg-linear-to-b from-blue-100 to-green-100 rounded-lg overflow-hidden border-2 border-green-300 mb-6">
                     {/* Sky with animated clouds */}
-                    <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-sky-200 to-transparent">
+                    <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-sky-200 to-transparent">
                         <div className="absolute animate-pulse top-4 left-1/4 text-2xl">☁️</div>
                         <div className="absolute animate-pulse top-6 right-1/4 text-2xl delay-1000">☁️</div>
                     </div>
 
                     {/* Ground */}
-                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-green-200 to-green-300" />
+                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-b from-green-200 to-green-300" />
 
                     {/* Sun/Moon based on level */}
                     <div className="absolute top-4 right-8 text-3xl animate-bounce">
@@ -171,12 +170,12 @@ export default function AnimatedCityScene({
 
                 {/* Info cards */}
                 <div className="grid grid-cols-3 gap-2 mt-6">
-                    <div className="bg-gradient-to-br from-green-100 to-green-50 p-3 rounded-lg text-center">
+                    <div className="bg-linear-to-br from-green-100 to-green-50 p-3 rounded-lg text-center">
                         <p className="text-2xl">🏗️</p>
                         <p className="text-xs text-gray-600 mt-1">Total</p>
                         <p className="font-bold text-gray-900">{totalBuildings}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-3 rounded-lg text-center">
+                    <div className="bg-linear-to-br from-blue-100 to-blue-50 p-3 rounded-lg text-center">
                         <p className="text-2xl">💚</p>
                         <p className="text-xs text-gray-600 mt-1">Kesehatan</p>
                         <p className="font-bold text-green-600">
@@ -185,7 +184,7 @@ export default function AnimatedCityScene({
                             )}%
                         </p>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-100 to-purple-50 p-3 rounded-lg text-center">
+                    <div className="bg-linear-to-br from-purple-100 to-purple-50 p-3 rounded-lg text-center">
                         <p className="text-2xl">📈</p>
                         <p className="text-xs text-gray-600 mt-1">Pertumbuhan</p>
                         <p className="font-bold text-purple-600">Lv.{level}</p>

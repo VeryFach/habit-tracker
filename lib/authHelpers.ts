@@ -7,7 +7,7 @@ import { createClient } from './supabase'
 /**
  * Debounce helper untuk menghindari multiple rapid calls
  */
-export function createDebounce<T extends (...args: any[]) => any>(
+export function createDebounce<T extends (...args: unknown[]) => unknown>(
     func: T,
     delay: number = 500
 ) {
@@ -93,7 +93,7 @@ export async function checkAuthHealth(): Promise<{
         const supabase = createClient()
 
         // Try to get current user to verify connection
-        const { data, error } = await supabase.auth.getUser()
+        const { error } = await supabase.auth.getUser()
 
         if (error && !error.message.includes('Auth session missing')) {
             return {

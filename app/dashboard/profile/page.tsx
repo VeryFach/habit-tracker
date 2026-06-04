@@ -27,15 +27,6 @@ export default function ProfilePage() {
     getCurrentUser()
   }, [])
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        username: user.username || '',
-        avatar_url: user.avatar_url || '',
-      })
-    }
-  }, [user])
-
   const handleSave = async () => {
     try {
       await updateProfile(formData)
@@ -111,7 +102,13 @@ export default function ProfilePage() {
             ) : (
               <Button
                 variant="secondary"
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                  setFormData({
+                    username: user.username || '',
+                    avatar_url: user.avatar_url || '',
+                  })
+                  setEditing(true)
+                }}
                 className="w-full sm:w-auto"
               >
                 Edit Profile
