@@ -22,7 +22,7 @@ import {
   Gem,
   Hammer,
   Heart,
-  Home,
+  House,
   Landmark,
   Navigation,
   Search,
@@ -43,7 +43,7 @@ interface KotaTabProps {
 }
 
 const palette = {
-  //bg: '#F8FAFC',
+  bg: '#',
   card: '#FFFFFF',
   cardAlt: '#F1F5F9',
   border: '#E2E8F0',
@@ -128,12 +128,12 @@ export function KotaTab({ city, stats, onDeploy, onUpgrade, onRemove, onSwitchTa
   const selectedBuilding = selectedTile ? buildingMap[`${selectedTile.x}_${selectedTile.y}`] : null;
 
   return (
-    <div className="flex flex-col gap-6 p-4 pb-32" style={{ backgroundColor: palette.bg }}>
+    <div className="flex flex-col gap-6 p-4 pb-32">
       <section className="rounded-[2.5rem] border-2 p-5 sm:p-6 shadow-[4px_4px_12px_rgba(15,23,42,0.06)]" style={{ backgroundColor: palette.card, borderColor: palette.border }}>
         <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-3xl font-black italic uppercase tracking-tight leading-none" style={{ color: palette.accentTeal }}>
-              {city.currentEra}
+              {ERAS_CONFIG.find(e => e.id === city.currentEra)?.displayName ?? city.currentEra}
             </h2>
             <button
               onClick={() => onSwitchTab('evolution')}
@@ -164,7 +164,7 @@ export function KotaTab({ city, stats, onDeploy, onUpgrade, onRemove, onSwitchTa
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ResourceCard
-            icon={<Home className="h-4 w-4" />}
+            icon={<House className="h-4 w-4" />}
             label="Citizens / Housing"
             value={`${city.population} / ${summary.totalHousing}`}
             progress={Math.min(100, (city.population / (summary.totalHousing || 1)) * 100)}
@@ -254,7 +254,12 @@ export function KotaTab({ city, stats, onDeploy, onUpgrade, onRemove, onSwitchTa
             const x = index % GRID_SIZE;
             const y = Math.floor(index / GRID_SIZE);
             const building = buildingMap[`${x}_${y}`];
-            const type = building ? BUILDINGS.find(item => item.id === building.buildingTypeId) : null;
+
+            const buildingTypeId = building?.buildingTypeId;
+
+            const type = buildingTypeId
+              ? BUILDINGS.find(item => item.id === buildingTypeId)
+              : null;
             const isSelected = selectedTile?.x === x && selectedTile?.y === y;
             const canPlace = selectedBuildingType && !building;
 

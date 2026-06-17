@@ -4,6 +4,7 @@ import { Trophy, Users, TrendingUp, Medal } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 import { handleFirestoreError, OperationType } from '../lib/firestoreUtils';
+import { ERAS_CONFIG } from '../constants';
 
 interface LeaderboardEntry {
   userId: string;
@@ -110,7 +111,7 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
 
               <div className="text-right flex flex-col items-end">
                  <span className="text-[8px] font-black text-brand-teal bg-brand-teal/10 px-2 py-0.5 rounded whitespace-nowrap uppercase tracking-widest">
-                   {entry.currentEra}
+                   {ERAS_CONFIG.find(e => e.id === entry.currentEra)?.displayName ?? entry.currentEra}
                  </span>
                  {isTop3 && (
                    <Medal className={`w-5 h-5 mt-1 ${index === 0 ? 'text-brand-yellow' : 'text-gray-400'}`} />

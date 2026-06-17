@@ -1,11 +1,11 @@
 import { LucideIcon } from 'lucide-react';
 
 export enum Era {
-  STONE_AGE = 'Stone Age',
-  MEDIEVAL = 'Medieval',
-  INDUSTRIAL = 'Industrial',
-  MODERN = 'Modern',
-  DIGITAL = 'Digital'
+  STONE_AGE = 'STONE_AGE',
+  MEDIEVAL = 'MEDIEVAL',
+  INDUSTRIAL = 'INDUSTRIAL',
+  MODERN = 'MODERN',
+  DIGITAL = 'DIGITAL',
 }
 
 export type HabitType = 'daily' | 'weekly' | 'monthly';
@@ -15,7 +15,7 @@ export interface Habit {
   title: string;
   type: HabitType;
   completedDates: string[]; // ISO Strings
-  createdAt: string;
+  createdAt: string | unknown; // string in local state, Timestamp when written to Firestore
   targetCount: number;
   goldReward: number;
   expReward: number;
