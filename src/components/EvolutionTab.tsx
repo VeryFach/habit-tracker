@@ -73,7 +73,7 @@ export function EvolutionTab({ stats, city, onBack, onUnlock }: EvolutionTabProp
   };
 
   return (
-    <div className="flex flex-col gap-6 p-4 pb-32" style={{ backgroundColor: palette.bg }}>
+    <div className="flex flex-col gap-6 p-4 pb-32">
       <button
         onClick={onBack}
         className="flex w-fit items-center gap-2 text-[10px] font-black uppercase italic transition hover:opacity-70"

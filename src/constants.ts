@@ -1,10 +1,20 @@
 import { Era, BuildingType, EvolutionBranch } from './types';
 
-export const ERAS_CONFIG = [
+export interface EraConfig {
+  id: import('./types').Era;
+  minLevel: number;
+  name: string;
+  displayName: string;
+  description?: string;
+  unlocks?: string[];
+}
+
+export const ERAS_CONFIG: EraConfig[] = [
   { 
     id: Era.STONE_AGE, 
     minLevel: 1, 
     name: 'Stone Age',
+    displayName: 'Stone Age',
     description: 'Awal mula kemanusiaan. Fokus pada bertahan hidup dan pengumpulan dasar.',
     unlocks: ['nomadic', 'agrarian']
   },
@@ -12,12 +22,13 @@ export const ERAS_CONFIG = [
     id: Era.MEDIEVAL, 
     minLevel: 5, 
     name: 'Medieval',
+    displayName: 'Medieval',
     description: 'Zaman keemasan kerajaan dan ksatria.',
     unlocks: ['feudal', 'mercantile']
   },
-  { id: Era.INDUSTRIAL, minLevel: 15, name: 'Industrial' },
-  { id: Era.MODERN, minLevel: 30, name: 'Modern' },
-  { id: Era.DIGITAL, minLevel: 50, name: 'Digital Era' },
+  { id: Era.INDUSTRIAL, minLevel: 15, name: 'Industrial', displayName: 'Industrial' },
+  { id: Era.MODERN, minLevel: 30, name: 'Modern', displayName: 'Modern' },
+  { id: Era.DIGITAL, minLevel: 50, name: 'Digital Era', displayName: 'Digital Era' },
 ];
 
 export const EVOLUTION_BRANCHES: EvolutionBranch[] = [
