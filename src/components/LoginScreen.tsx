@@ -32,10 +32,10 @@ export function LoginScreen() {
         className="max-w-md sm:max-w-lg w-full"
       >
         <div className="mb-8 relative inline-block">
-           <div className="w-24 h-24 bg-brand-teal rounded-[2rem] border-2 border-gray-200 neo-shadow-lg flex items-center justify-center text-4xl transform -rotate-6">
+           <div className="w-24 h-24 bg-brand-teal rounded-[2rem] border-2 border-brand-border neo-shadow-lg flex items-center justify-center text-4xl transform -rotate-6">
               🏰
            </div>
-           <div className="absolute -top-4 -right-4 bg-brand-yellow p-2 rounded-xl border border-gray-200 neo-shadow-sm animate-bounce">
+           <div className="absolute -top-4 -right-4 bg-brand-yellow p-2 rounded-xl border border-brand-border neo-shadow-sm animate-bounce">
               <Sparkles className="w-6 h-6 text-brand-dark" />
            </div>
         </div>
@@ -43,7 +43,7 @@ export function LoginScreen() {
         <h1 className="text-6xl font-black italic uppercase tracking-tighter leading-none mb-4 text-brand-dark">
           HABI<span className="text-brand-teal">TORIA</span>
         </h1>
-        <p className="text-brand-dark/40 font-black uppercase text-xs tracking-[0.3em] mb-12">
+        <p className="text-brand-muted font-black uppercase text-xs tracking-[0.3em] mb-12">
           Sync your productivity with the simulation
         </p>
 
@@ -62,7 +62,7 @@ export function LoginScreen() {
             </p>
           )}
           
-          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-relaxed px-8">
+          <p className="text-[10px] text-brand-muted font-bold uppercase tracking-widest leading-relaxed px-8">
             Your data is stored securely in the cloud via Firebase.
           </p>
         </div>

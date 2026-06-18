@@ -64,7 +64,7 @@ export function EvolutionTab({ stats, city, onBack, onUnlock }: EvolutionTabProp
     <div className="flex flex-col gap-6 p-4 pb-32">
       <button
         onClick={onBack}
-        className="flex w-fit items-center gap-2 text-[10px] font-black uppercase italic text-brand-dark transition hover:opacity-70 text-brand-dark"
+        className="flex w-fit items-center gap-2 text-[10px] font-black uppercase italic text-brand-dark transition hover:opacity-70"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to City
@@ -372,7 +372,7 @@ function RequirementCard({ req, stats, isMet, ownedCount }: { req: EvolutionRequ
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
             <p className="truncate text-xs font-black uppercase text-brand-dark">{buildingType?.name || req.description}</p>
-            {isMet ? <Check className="h-4 w-4 text-teal-400" /> : <Lock className="h-3.5 w-3.5 text-brand-dark/30" />}
+            {isMet ? <Check className="h-4 w-4 text-teal-400" /> : <Lock className="h-3.5 w-3.5 text-brand-subtle" />}
           </div>
           <p className="mb-2 text-[8px] font-bold uppercase text-brand-muted">{buildingType?.category || 'building'} requirement</p>
           <div className="mb-1 h-1 overflow-hidden rounded-full bg-black/20">
@@ -405,7 +405,7 @@ function RequirementCard({ req, stats, isMet, ownedCount }: { req: EvolutionRequ
           </p>
         </div>
       </div>
-      {isMet ? <Check className="h-4 w-4 text-teal-400" /> : <Lock className="h-3.5 w-3.5 text-brand-dark/30" />}
+      {isMet ? <Check className="h-4 w-4 text-teal-400" /> : <Lock className="h-3.5 w-3.5 text-brand-subtle" />}
     </div>
   );
 }

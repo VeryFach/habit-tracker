@@ -48,14 +48,14 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
 
         <div className="space-y-4">
           {/* Consistency Momentum Overlay */}
-          <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 relative overflow-hidden group">
+          <div className="bg-brand-surface-alt border border-brand-border rounded-[2rem] p-6 relative overflow-hidden group">
              <div className="absolute top-0 right-0 p-4 opacity-10">
                 <Sparkles className={`w-20 h-20 ${report.momentumBonus >= 0 ? 'text-brand-teal' : 'text-brand-red'}`} />
              </div>
              
              <div className="relative z-10">
                <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-[10px] font-black uppercase text-white/40 tracking-widest flex items-center gap-2">
+                  <h4 className="text-[10px] font-black uppercase text-brand-subtle tracking-widest flex items-center gap-2">
                     <Zap className="w-3 h-3 text-brand-yellow" /> Momentum Protocol
                   </h4>
                   <span className={`text-xs font-black font-mono ${report.momentumBonus >= 0 ? 'text-brand-teal' : 'text-brand-red'}`}>
@@ -63,10 +63,10 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                   </span>
                </div>
                <div className="flex items-baseline gap-2">
-                  <p className="text-4xl font-black font-mono text-white leading-none">{stats.momentum}%</p>
-                  <p className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Active Momentum</p>
+                  <p className="text-4xl font-black font-mono text-brand-dark leading-none">{stats.momentum}%</p>
+                  <p className="text-[8px] font-bold text-brand-muted uppercase tracking-widest">Active Momentum</p>
                </div>
-               <p className="text-[10px] font-medium text-white/60 italic mt-3">
+               <p className="text-[10px] font-medium text-brand-muted italic mt-3">
                  "{report.message}"
                </p>
              </div>
@@ -81,8 +81,8 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                  <h4 className="text-[10px] font-black uppercase text-brand-red tracking-widest mb-3 flex items-center gap-2">
                     <AlertTriangle className="w-3 h-3" /> Incident Report
                  </h4>
-                 <h5 className="text-lg font-black text-white italic leading-none mb-2">{report.event.name}</h5>
-                 <p className="text-xs text-white/60 font-medium leading-relaxed">
+                 <h5 className="text-lg font-black text-brand-dark italic leading-none mb-2">{report.event.name}</h5>
+                 <p className="text-xs text-brand-muted font-medium leading-relaxed">
                     {report.event.description}
                  </p>
                  <div className="mt-4 flex items-center gap-2 text-[10px] font-black uppercase text-brand-red">
@@ -93,17 +93,17 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
           )}
 
           {/* Real World Performance */}
-          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6">
-             <h4 className="text-[10px] font-black uppercase text-white/40 tracking-widest mb-6 flex items-center justify-between">
+          <div className="bg-brand-surface-alt border border-brand-border rounded-[2.5rem] p-6">
+             <h4 className="text-[10px] font-black uppercase text-brand-subtle tracking-widest mb-6 flex items-center justify-between">
                 <span>Real World Impact</span>
-                <span className="text-white/60 bg-white/10 px-2 py-0.5 rounded-md">{report.habitsCompleted}/{report.habitsTotal} Completed</span>
+                <span className="text-brand-muted bg-brand-surface-alt px-2 py-0.5 rounded-md">{report.habitsCompleted}/{report.habitsTotal} Completed</span>
              </h4>
              
              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                   <p className="text-[8px] font-black text-white/30 uppercase">Biometric Status</p>
+                   <p className="text-[8px] font-black text-brand-subtle uppercase">Biometric Status</p>
                    <div className="flex items-center gap-2">
-                      <div className={`p-2 rounded-xl bg-white/5 border ${report.hpChange >= 0 ? 'border-brand-teal/30 text-brand-teal' : 'border-brand-red/30 text-brand-red'}`}>
+                      <div className={`p-2 rounded-xl bg-brand-surface-alt border ${report.hpChange >= 0 ? 'border-brand-teal/30 text-brand-teal' : 'border-brand-red/30 text-brand-red'}`}>
                          {report.hpChange >= 0 ? <Heart className="w-4 h-4" /> : <Skull className="w-4 h-4" />}
                       </div>
                       <span className={`text-xl font-black font-mono ${report.hpChange >= 0 ? 'text-brand-teal' : 'text-brand-red'}`}>
@@ -112,9 +112,9 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                    </div>
                 </div>
                 <div className="space-y-1">
-                   <p className="text-[8px] font-black text-white/30 uppercase">Daily Earnings</p>
+                   <p className="text-[8px] font-black text-brand-subtle uppercase">Daily Earnings</p>
                    <div className="flex items-center gap-2">
-                      <div className="p-2 rounded-xl bg-white/5 border border-brand-yellow/30 text-brand-yellow">
+                      <div className="p-2 rounded-xl bg-brand-surface-alt border border-brand-yellow/30 text-brand-yellow">
                          <Coins className="w-4 h-4" />
                       </div>
                       <span className="text-xl font-black font-mono text-brand-yellow">
@@ -126,8 +126,8 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
           </div>
 
           {/* City Simulation Report */}
-          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 relative overflow-hidden">
-             <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
+          <div className="bg-brand-surface-alt border border-brand-border rounded-[2.5rem] p-6 relative overflow-hidden">
+             <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-border">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${stats.momentum}%` }}
@@ -135,7 +135,7 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                 />
              </div>
              
-             <h4 className="text-[10px] font-black uppercase text-white/40 tracking-widest mb-6">Simulation Summary</h4>
+             <h4 className="text-[10px] font-black uppercase text-brand-subtle tracking-widest mb-6">Simulation Summary</h4>
              
              <div className="flex flex-col gap-4">
                 <div className="flex justify-between items-center group">
@@ -144,8 +144,8 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                          <Users className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-[8px] font-black text-white/40 uppercase">Demographics</p>
-                        <p className="text-sm font-black text-white italic">Population Growth</p>
+                        <p className="text-[8px] font-black text-brand-subtle uppercase">Demographics</p>
+                        <p className="text-sm font-black text-brand-dark italic">Population Growth</p>
                       </div>
                    </div>
                    <div className={`text-right ${report.populationGrowth >= 0 ? 'text-brand-teal' : 'text-brand-red'}`}>
@@ -177,8 +177,8 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                          <ArrowUpRight className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-[8px] font-black text-white/40 uppercase">Economic Flow</p>
-                        <p className="text-sm font-black text-white italic">Treasury Collection</p>
+                        <p className="text-[8px] font-black text-brand-subtle uppercase">Economic Flow</p>
+                        <p className="text-sm font-black text-brand-dark italic">Treasury Collection</p>
                       </div>
                    </div>
                    <div className="text-right text-brand-yellow">
@@ -193,8 +193,8 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
                          <Zap className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-[8px] font-black text-white/40 uppercase">Evolution Data</p>
-                        <p className="text-sm font-black text-white italic">Intellectual Progress</p>
+                        <p className="text-[8px] font-black text-brand-subtle uppercase">Evolution Data</p>
+                        <p className="text-sm font-black text-brand-dark italic">Intellectual Progress</p>
                       </div>
                    </div>
                    <div className="text-right text-brand-purple">

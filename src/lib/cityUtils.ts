@@ -177,7 +177,7 @@ export const getBuildingOccupancy = (population: number, totalHousing: number, b
 };
 
 export const getOccupancyStatus = (occupancy: number, capacity: number) => {
-  if (capacity === 0) return { label: 'N/A', color: 'text-gray-400' };
+  if (capacity === 0) return { label: 'N/A', color: 'text-brand-muted' };
   const ratio = occupancy / capacity;
   if (ratio >= 1.0) return { label: 'Full Capacity', color: 'text-brand-red' };
   if (ratio >= 0.8) return { label: 'Overcrowded', color: 'text-brand-yellow' };

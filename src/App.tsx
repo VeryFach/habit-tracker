@@ -184,7 +184,7 @@ export default function App() {
         <motion.div 
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="fixed top-24 z-50 bg-brand-red text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-gray-200 neo-shadow-sm flex items-center gap-2"
+          className="fixed top-24 z-50 bg-brand-red text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-brand-border neo-shadow-sm flex items-center gap-2"
         >
           <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
           Offline Mode: Limited Sync
@@ -344,13 +344,13 @@ export default function App() {
              <motion.div
                initial={{ scale: 0.5, rotate: -20, opacity: 0 }}
                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-               className="bg-white border-2 border-gray-200 p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative z-10"
+               className="bg-brand-surface border-2 border-brand-border p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative z-10"
              >
-                <div className="mb-6 inline-block bg-brand-yellow p-4 rounded-3xl border-2 border-gray-200 neo-shadow">
+                <div className="mb-6 inline-block bg-brand-yellow p-4 rounded-3xl border-2 border-brand-border neo-shadow">
                    <TrendingUp className="w-12 h-12 text-brand-dark" />
                 </div>
                 <h2 className="text-5xl font-black italic uppercase tracking-tighter mb-2">LEVEL UP!</h2>
-                <p className="text-brand-dark/40 font-black uppercase text-xs tracking-widest mb-8">Evolusimu Berlanjut</p>
+                <p className="text-brand-muted font-black uppercase text-xs tracking-widest mb-8">Evolusimu Berlanjut</p>
                 
                 <div className="flex items-center justify-center gap-6 mb-10">
                    <div className="flex flex-col items-center">
@@ -358,7 +358,7 @@ export default function App() {
                    </div>
                    <ChevronRight className="w-8 h-8 text-brand-dark opacity-20" />
                    <div className="flex flex-col items-center">
-                      <span className="text-6xl font-mono font-black italic bg-brand-teal px-4 rounded-2xl border-2 border-gray-200">LVL {sleepFlow.data.newLevel}</span>
+                      <span className="text-6xl font-mono font-black italic bg-brand-teal px-4 rounded-2xl border-2 border-brand-border">LVL {sleepFlow.data.newLevel}</span>
                    </div>
                 </div>
 
@@ -384,20 +384,20 @@ export default function App() {
               initial={{ scale: 0.5, y: 100, rotate: 10 }}
               animate={{ scale: 1, y: 0, rotate: 0 }}
               exit={{ scale: 0.5, opacity: 0 }}
-              className="bg-white border-2 border-gray-200 p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative"
+              className="bg-brand-surface border-2 border-brand-border p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative"
               onClick={e => e.stopPropagation()}
             >
-              <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-yellow rounded-full border-2 border-gray-200 flex items-center justify-center text-5xl neo-shadow animate-bounce">
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-yellow rounded-full border-2 border-brand-border flex items-center justify-center text-5xl neo-shadow animate-bounce">
                 {gachaReward.type === 'gold' ? '💰' : gachaReward.type === 'silver' ? '🪙' : gachaReward.type === 'exp' ? '✨' : '❤️'}
               </div>
 
               <div className="mt-8">
                 <h3 className="text-4xl font-black italic uppercase tracking-tighter mb-2 text-brand-dark">Kuil Nasib</h3>
-                <p className="text-gray-400 font-extrabold uppercase text-[10px] tracking-[0.3em] mb-6">Berkat yang Diterima</p>
+                <p className="text-brand-muted font-extrabold uppercase text-[10px] tracking-[0.3em] mb-6">Berkat yang Diterima</p>
                 
-                <div className="bg-brand-bg border-2 border-gray-200 rounded-3xl p-6 mb-8">
+                <div className="bg-brand-bg border-2 border-brand-border rounded-3xl p-6 mb-8">
                   <span className="text-6xl font-black font-mono text-brand-teal">+{gachaReward.amount}</span>
-                  <p className="text-xs font-black uppercase text-brand-dark/40 mt-1">{gachaReward.type}</p>
+                  <p className="text-xs font-black uppercase text-brand-subtle mt-1">{gachaReward.type}</p>
                 </div>
 
                 <p className="font-bold text-sm text-brand-dark mb-10 italic">"{gachaReward.message}"</p>
@@ -423,7 +423,7 @@ export default function App() {
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              className={`w-full max-w-xs p-8 rounded-[2.5rem] border-2 border-gray-200 neo-shadow-lg text-center ${
+              className={`w-full max-w-xs p-8 rounded-[2.5rem] border-2 border-brand-border neo-shadow-lg text-center ${
                 conversionStatus.success ? 'bg-white' : 'bg-brand-red text-white'
               }`}
               onClick={e => e.stopPropagation()}
@@ -439,7 +439,7 @@ export default function App() {
                 {conversionStatus.success ? 'Berhasil!' : 'Gagal!'}
               </h4>
               <p className={`font-bold mb-6 ${
-                conversionStatus.success ? 'text-gray-400' : 'text-white/80'
+                conversionStatus.success ? 'text-brand-muted' : 'text-white/80'
               }`}>
                 {conversionStatus.message}
               </p>

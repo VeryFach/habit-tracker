@@ -53,12 +53,12 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
       {/* Header */}
       <div className="bg-brand-dark text-white rounded-[2.5rem] p-6 neo-shadow transform -rotate-1">
         <div className="flex items-center gap-4">
-          <div className="bg-brand-yellow p-2.5 rounded-2xl border border-gray-200 neo-shadow-sm">
+          <div className="bg-brand-yellow p-2.5 rounded-2xl border border-brand-border neo-shadow-sm">
             <Trophy className="w-6 h-6 text-brand-dark" />
           </div>
           <div>
             <h2 className="text-2xl font-black uppercase italic tracking-tighter leading-none">Global Rankings</h2>
-            <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] uppercase mt-1">Simulated Leaders</p>
+            <p className="text-[10px] font-bold text-brand-muted tracking-[0.2em] uppercase mt-1">Simulated Leaders</p>
           </div>
         </div>
       </div>
@@ -76,14 +76,14 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
               className={`flex items-center gap-4 p-4 rounded-[2rem] border-2 transition-all ${
-                isTop3 ? 'bg-white border-gray-200 neo-shadow-lg' : 'bg-white/50 border-gray-200/50'
+                isTop3 ? 'bg-brand-surface border-brand-border neo-shadow-lg' : 'bg-brand-surface-alt border-brand-border/50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-2xl border border-gray-200 flex items-center justify-center font-black text-xl neo-shadow-sm flex-shrink-0 ${isTop3 ? medalColors[index] : 'bg-brand-bg'}`}>
+              <div className={`w-12 h-12 rounded-2xl border border-brand-border flex items-center justify-center font-black text-xl neo-shadow-sm flex-shrink-0 ${isTop3 ? medalColors[index] : 'bg-brand-bg'}`}>
                 {index + 1}
               </div>
 
-              <div className="w-12 h-12 rounded-full border-2 border-gray-200 overflow-hidden flex-shrink-0">
+              <div className="w-12 h-12 rounded-full border-2 border-brand-border overflow-hidden flex-shrink-0">
                  {entry.photoURL ? (
                     <img src={entry.photoURL} alt={entry.displayName} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                  ) : (
@@ -100,11 +100,11 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
                 <div className="flex items-center gap-3">
                    <div className="flex items-center gap-1">
                       <TrendingUp className="w-3 h-3 text-brand-teal" />
-                      <span className="text-[10px] font-black text-gray-500 uppercase">Lv.{entry.level}</span>
+                      <span className="text-[10px] font-black text-brand-subtle uppercase">Lv.{entry.level}</span>
                    </div>
                    <div className="flex items-center gap-1">
                       <Users className="w-3 h-3 text-brand-teal" />
-                      <span className="text-[10px] font-black text-gray-500 uppercase">{entry.population.toLocaleString()} Pop</span>
+                      <span className="text-[10px] font-black text-brand-subtle uppercase">{entry.population.toLocaleString()} Pop</span>
                    </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
                    {ERAS_CONFIG.find(e => e.id === entry.currentEra)?.displayName ?? entry.currentEra}
                  </span>
                  {isTop3 && (
-                   <Medal className={`w-5 h-5 mt-1 ${index === 0 ? 'text-brand-yellow' : 'text-gray-400'}`} />
+                   <Medal className={`w-5 h-5 mt-1 ${index === 0 ? 'text-brand-yellow' : 'text-brand-muted'}`} />
                  )}
               </div>
             </motion.div>
@@ -122,15 +122,15 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
         })}
 
         {entries.length === 0 && (
-          <div className="bg-white/50 p-12 rounded-[2rem] border-2 border-dashed border-gray-200 text-center">
-             <p className="font-bold text-gray-400 uppercase text-xs tracking-widest">No rankings yet</p>
+          <div className="bg-brand-surface-alt p-12 rounded-[2rem] border-2 border-dashed border-brand-border text-center">
+             <p className="font-bold text-brand-muted uppercase text-xs tracking-widest">No rankings yet</p>
           </div>
         )}
       </div>
 
       <div className="p-8 bg-brand-teal/5 border-2 border-brand-teal/15 rounded-[2.5rem] mt-4">
          <p className="text-[10px] font-black text-brand-teal uppercase tracking-[0.2em] mb-2 leading-tight">Expansion Note</p>
-         <p className="text-xs font-bold text-gray-500 leading-relaxed italic">
+         <p className="text-xs font-bold text-brand-subtle leading-relaxed italic">
            Rankings are updated every time you complete a daily report or build infrastructure. Only the top 20 survivors are shown.
          </p>
       </div>

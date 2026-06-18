@@ -46,7 +46,7 @@ const RECOVERY_ITEMS = [
 export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
   const { isDark } = useTheme();
   const colors = isDark
-    ? { bg: '#0F172A', surface: '#1E293B', surfaceAlt: '#334155', border: '#334155', text: '#F1F5F9', textMuted: '#94A3B8' }
+    ? { bg: '#0F172A', surface: '#1E293B', surfaceAlt: '#334155', border: '#475569', text: '#F8FAFC', textMuted: '#CBD5E1' }
     : { bg: '#FDF6E3', surface: '#FFFFFF', surfaceAlt: '#F1F5F9', border: '#E2E8F0', text: '#1E293B', textMuted: '#64748B' };
   
   const [silverInput, setSilverInput] = useState(100);
@@ -190,7 +190,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
               >
                 <div className="flex items-center justify-between mb-3">
                   <item.icon className="w-6 h-6" style={{ color: colors.text }} />
-                  <div className="bg-brand-yellow border border-gray-200 px-2 py-1 rounded-lg flex items-center gap-1">
+                  <div className="bg-brand-yellow border border-brand-border px-2 py-1 rounded-lg flex items-center gap-1">
                     <Coins className="w-3 h-3" />
                     <span className="text-xs font-black">{item.costGold}</span>
                   </div>
@@ -214,20 +214,20 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
         </div>
 
         {/* Silver → Gold */}
-        <div className="border-2 border-gray-200 p-6 rounded-3xl mb-4 neo-shadow" style={{ backgroundColor: isDark ? '#1E293B' : '#2D3436', borderColor: isDark ? '#334155' : '#2D3436' }}>
+        <div className="border-2 p-6 rounded-3xl mb-4 neo-shadow" style={{ backgroundColor: isDark ? '#1E293B' : '#2D3436', borderColor: isDark ? '#475569' : '#2D3436' }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h3 className="text-lg font-black italic uppercase text-brand-yellow">Liquid Asset</h3>
-              <p className="text-xs font-black uppercase mt-1" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>City Silver → Habit Gold</p>
+              <p className="text-xs font-black uppercase mt-1" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>City Silver → Habit Gold</p>
             </div>
             <div className="border border-brand-border rounded-2xl px-3 py-2" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)', borderColor: '#FBBF24' }}>
-              <p className="text-[10px] font-black" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>Market Rate</p>
+              <p className="text-[10px] font-black" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>Market Rate</p>
               <p className="text-xs font-black text-brand-yellow">{silverPerGoldRate}S : 1G</p>
             </div>
           </div>
 
           <div className="mb-4">
-            <label className="text-xs font-black uppercase block mb-2" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>Conversion Amount</label>
+            <label className="text-xs font-black uppercase block mb-2" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>Conversion Amount</label>
             <input
               type="range"
               min="10"
@@ -239,8 +239,8 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
               style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}
             />
             <div className="text-center mt-2">
-              <span className="text-2xl font-black font-mono" style={{ color: isDark ? '#F1F5F9' : '#2D3436' }}>{silverInput}</span>
-              <span className="text-xs font-black ml-1" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>S</span>
+              <span className="text-2xl font-black font-mono" style={{ color: isDark ? '#F8FAFC' : '#2D3436' }}>{silverInput}</span>
+              <span className="text-xs font-black ml-1" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>S</span>
             </div>
           </div>
 
@@ -248,13 +248,13 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
             <div className="flex items-center gap-3">
               <RefreshCw className="w-4 h-4 text-brand-yellow" />
               <div>
-                <p className="text-xs font-black" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>Est. Gold Received</p>
+                <p className="text-xs font-black" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>Est. Gold Received</p>
                 <p className="text-lg font-black text-brand-yellow font-mono">{silverToGoldResult} G</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xs font-black" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>Net Fee (5%)</p>
-              <p className="text-sm font-black" style={{ color: isDark ? '#F1F5F9' : '#2D3436' }}>-{Math.ceil((silverInput / silverPerGoldRate) * networkFee)} G</p>
+              <p className="text-xs font-black" style={{ color: isDark ? 'rgb(203, 213, 225)' : 'rgb(107, 114, 128)' }}>Net Fee (5%)</p>
+              <p className="text-sm font-black" style={{ color: isDark ? '#F8FAFC' : '#2D3436' }}>-{Math.ceil((silverInput / silverPerGoldRate) * networkFee)} G</p>
             </div>
           </div>
 
@@ -269,7 +269,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
         </div>
 
         {/* Gold → Silver */}
-        <div className="border-2 border-gray-200 p-6 rounded-3xl neo-shadow border-brand-border" style={{ backgroundColor: colors.surface }}>
+        <div className="border-2 p-6 rounded-3xl neo-shadow border-brand-border" style={{ backgroundColor: colors.surface }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h3 className="text-lg font-black italic uppercase text-brand-teal">Treasury Exchange</h3>
@@ -339,26 +339,26 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
             <Info className="w-5 h-5 text-white" />
           </button>
         </div>
-        <p className="text-xs font-black uppercase text-white/70 mb-4">Sacrifice Gold for Civilization Blessing</p>
+        <p className="text-xs font-black uppercase text-white/80 mb-4">Sacrifice Gold for Civilization Blessing</p>
 
         {showGachaInfo && (
           <div className="p-4 rounded-2xl mb-4 backdrop-blur-sm" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
             <p className="text-xs font-black text-brand-yellow uppercase mb-3">Divine Drop Rates</p>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-white/75">Ultimate Jackpot (Gold)</span>
+                <span className="text-white/90">Ultimate Jackpot (Gold)</span>
                 <span className="font-black text-brand-yellow">5%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/75">Treasury Overflow (Silver)</span>
+                <span className="text-white/90">Treasury Overflow (Silver)</span>
                 <span className="font-black text-brand-teal">25%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/75">Ancient Wisdom (EXP)</span>
+                <span className="text-white/90">Ancient Wisdom (EXP)</span>
                 <span className="font-black text-purple-300">30%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/75">Life Blessing (HP)</span>
+                <span className="text-white/90">Life Blessing (HP)</span>
                 <span className="font-black text-brand-red">40%</span>
               </div>
             </div>
@@ -382,14 +382,14 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
               </div>
             ))}
           </div>
-          <span className="text-[10px] font-black text-white/45 uppercase">128 Players recently won</span>
+          <span className="text-[10px] font-black text-white/70 uppercase">128 Players recently won</span>
         </div>
       </section>
 
       {/* Popup */}
       {popupVisible && popupResult && (
         <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
-          <div className="animate-bounce border-2 border-gray-200 p-6 rounded-3xl neo-shadow-lg max-w-xs border-brand-border" style={{ backgroundColor: colors.surface }}>
+          <div className="animate-bounce border-2 p-6 rounded-3xl neo-shadow-lg max-w-xs border-brand-border" style={{ backgroundColor: colors.surface }}>
             <div className={`text-center`}>
               <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center mx-auto mb-3`} style={{ borderColor: popupResult.color === 'brand-red' ? '#FF6B6B' : popupResult.color === 'brand-teal' ? '#4ECDC4' : popupResult.color === 'brand-yellow' ? '#FFE66D' : '#A29BFE', backgroundColor: popupResult.color === 'brand-red' ? 'rgba(255, 107, 107, 0.1)' : popupResult.color === 'brand-teal' ? 'rgba(78, 205, 196, 0.1)' : popupResult.color === 'brand-yellow' ? 'rgba(255, 230, 109, 0.1)' : 'rgba(162, 155, 254, 0.1)' }}>
                 {popupResult.icon === 'check' && <CheckCircle className="w-8 h-8 text-brand-red" />}

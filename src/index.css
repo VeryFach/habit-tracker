@@ -13,6 +13,7 @@
   --color-brand-surface: #FFFFFF;      /* pure white — card surfaces */
   --color-brand-surface-alt: #F8FAFC;  /* slate-50 — nested/alt surfaces */
   --color-brand-muted: #64748B;        /* slate-500 — secondary text */
+  --color-brand-subtle: #94A3B8;       /* slate-400 — tertiary text */
   --color-brand-border: #D1D5DB;       /* gray-300 — visible borders */
 
   /* ── Accent colors ──────────────────────────────────────────
@@ -38,8 +39,9 @@
   --color-brand-dark: #F8FAFC;         /* slate-50  — bright text on dark */
   --color-brand-surface: #0F172A;      /* slate-900 — elevated cards */
   --color-brand-surface-alt: #1E293B;  /* slate-800 — nested surfaces */
-  --color-brand-muted: #94A3B8;        /* slate-400 — secondary text */
-  --color-brand-border: #334155;       /* slate-700 — visible borders on dark */
+  --color-brand-muted: #CBD5E1;        /* slate-300 — secondary text (improved contrast) */
+  --color-brand-subtle: #94A3B8;       /* slate-400 — tertiary text only */
+  --color-brand-border: #475569;       /* slate-600 — visible borders on dark */
 
   --color-brand-red: #F87171;          /* red-400    — softer danger on dark */
   --color-brand-teal: #2DD4BF;         /* teal-400   — luminous accent on dark */

@@ -44,7 +44,7 @@ export function Header({ stats }: HeaderProps) {
 
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Gold */}
-        <div className="border border-gray-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-yellow neo-shadow-sm">
+        <div className="border border-brand-border px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-yellow neo-shadow-sm">
           <Coins className="w-3.5 h-3.5 text-brand-dark" />
           <span className="font-black text-xs text-brand-dark">
             {stats.gold.toLocaleString()}
@@ -52,7 +52,7 @@ export function Header({ stats }: HeaderProps) {
         </div>
 
         {/* Silver */}
-        <div className="border border-gray-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-purple neo-shadow-sm">
+        <div className="border border-brand-border px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-purple neo-shadow-sm">
           <Gem className="w-3.5 h-3.5 text-white" />
           <span className="font-black text-xs text-white">
             {stats.silver.toLocaleString()}

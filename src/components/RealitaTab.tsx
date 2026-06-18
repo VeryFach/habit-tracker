@@ -77,7 +77,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
         
         <div className="grid grid-cols-7 gap-1.5 mb-4">
           {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map((d) => (
-            <div key={d} className="text-center text-[8px] font-black text-gray-400 uppercase tracking-widest">{d}</div>
+            <div key={d} className="text-center text-[8px] font-black text-brand-muted uppercase tracking-widest">{d}</div>
           ))}
           {days.map((day, i) => {
             if (!day) return <div key={`empty-${i}`} />;
@@ -110,11 +110,11 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
         <div className="flex items-center gap-4 mt-6 pt-6 border-t-2 border-dashed border-brand-border">
            <div className="flex items-center gap-2">
              <div className="w-3 h-3 bg-brand-surface-alt border border-brand-border rounded" />
-             <span className="text-[8px] font-black uppercase text-gray-400">Low</span>
+             <span className="text-[8px] font-black uppercase text-brand-muted">Low</span>
            </div>
            <div className="flex items-center gap-2">
              <div className="w-3 h-3 bg-brand-teal border border-brand-border rounded" />
-             <span className="text-[8px] font-black uppercase text-gray-400">High Impact</span>
+             <span className="text-[8px] font-black uppercase text-brand-muted">High Impact</span>
            </div>
         </div>
       </div>
@@ -196,7 +196,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
             <div className="flex justify-between items-center px-1">
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-brand-teal" />
-                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Inventory Habit</h3>
+                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-subtle">Inventory Habit</h3>
               </div>
               <button 
                 onClick={() => setIsAdding(true)}
@@ -214,7 +214,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
                   className={`flex-1 px-4 py-2 rounded-xl text-[9px] font-black uppercase transition-all whitespace-nowrap ${
                     categoryFilter === cat 
                       ? 'text-brand-dark neo-shadow-sm' 
-                      : 'text-gray-400 hover:text-brand-dark'
+                      : 'text-brand-muted hover:text-brand-dark'
                   }`}
                 >
                   {cat}
@@ -227,10 +227,10 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
             {filteredHabits.length === 0 ? (
               <div className="py-12 px-8 bg-brand-surface/50 border-2 border-dashed border-brand-border rounded-3xl text-center neo-shadow-sm">
                 <div className="w-16 h-16 bg-brand-bg rounded-3xl flex items-center justify-center mx-auto mb-4 border border-brand-border">
-                  <CalendarIcon className="w-8 h-8 text-gray-300" />
+                  <CalendarIcon className="w-8 h-8 text-brand-muted" />
                 </div>
                 <h4 className="text-xl font-black uppercase italic tracking-tighter text-brand-dark mb-1">Dunia Hampa?</h4>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed">
+                <p className="text-[10px] font-bold text-brand-muted uppercase tracking-widest leading-relaxed">
                   Belum ada habit yang direncanakan. <br/>Mulai evolusi pertamamu!
                 </p>
                 <button 
@@ -266,7 +266,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <p className={`font-black uppercase tracking-tighter truncate leading-tight ${isCompleted ? 'text-gray-400 line-through' : isEmergency ? 'text-brand-red' : 'text-brand-dark'}`}>
+                      <p className={`font-black uppercase tracking-tighter truncate leading-tight ${isCompleted ? 'text-brand-muted line-through' : isEmergency ? 'text-brand-red' : 'text-brand-dark'}`}>
                         {habit.title}
                       </p>
                       {isEmergency && (
@@ -284,7 +284,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
                       }`}>
                         {habit.type}
                       </span>
-                      <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest whitespace-nowrap">
+                      <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest whitespace-nowrap">
                         <span className="text-brand-teal">+ {habit.goldReward}G</span> • <span className="text-brand-purple">+ {habit.expReward}X</span>
                       </p>
                     </div>
@@ -340,7 +340,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="fixed bottom-0 left-0 right-0 bg-brand-surface z-[101] rounded-t-[2.5rem] p-8 border-t-2 border-brand-border neo-shadow-lg max-h-[85vh] overflow-y-auto"
             >
-              <div className="w-12 h-1.5 bg-gray-100 rounded-full mx-auto mb-8" />
+              <div className="w-12 h-1.5 bg-brand-surface-alt rounded-full mx-auto mb-8" />
               
               <div className="flex justify-between items-center mb-8">
                 <h4 className="text-3xl font-black uppercase italic tracking-tighter">{editingHabit ? 'Modifikasi Evolusi' : 'Inisiasi Evolusi'}</h4>
@@ -351,12 +351,12 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
 
               <div className="space-y-8">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400 tracking-[0.2em] px-1">Judul Habit</label>
+                  <label className="text-[10px] font-black uppercase text-brand-muted tracking-[0.2em] px-1">Judul Habit</label>
                   <input
                     autoFocus
                     type="text"
                     placeholder="Apa rencana besarmu?"
-                    className="w-full text-2xl font-black uppercase border-b-2 border-brand-teal bg-transparent p-3 text-brand-dark focus:outline-none placeholder:text-gray-300 transition-colors text-brand-dark placeholder:text-brand-muted"
+                    className="w-full text-2xl font-black uppercase border-b-2 border-brand-teal bg-transparent p-3 text-brand-dark focus:outline-none placeholder:text-brand-muted transition-colors"
                     value={newHabit}
                     onChange={e => setNewHabit(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && (editingHabit ? handleUpdate() : handleAdd())}
@@ -364,7 +364,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
                 </div>
 
                 <div className="space-y-4">
-                  <label className="text-[10px] font-black uppercase text-gray-400 tracking-[0.2em] px-1">Frekuensi Evolusi</label>
+                  <label className="text-[10px] font-black uppercase text-brand-muted tracking-[0.2em] px-1">Frekuensi Evolusi</label>
                   <div className="flex gap-2">
                     {(['daily', 'weekly', 'monthly'] as HabitType[]).map((type) => (
                       <button
@@ -391,7 +391,7 @@ export function RealitaTab({ habits, hp, momentum, onAdd, onComplete, onUpdate, 
                   </button>
 
                   {editingHabit && (
-                    <div className="pt-4 mt-4 border-t border-gray-50">
+                    <div className="pt-4 mt-4 border-t border-brand-border">
                        {deletingHabitId === editingHabit.id ? (
                          <div className="flex gap-2 animate-in slide-in-from-bottom-4">
                            <button 
