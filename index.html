@@ -3,14 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>CivFit | Civilized Growth</title>
+    <title>Habitoria | Civilized Growth</title>
     <meta name="description" content="Gamified habit tracker and civilization simulator" />
-    <meta name="theme-color" content="#F4F1EA" />
+    <meta name="theme-color" content="#F3F4F6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" href="/pwa-192x192.png" />
+    <script>
+      (function() {
+        var t = localStorage.getItem('habitoria_theme');
+        var d = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('dark');
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

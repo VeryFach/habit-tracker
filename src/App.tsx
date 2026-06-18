@@ -184,14 +184,14 @@ export default function App() {
         <motion.div 
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="fixed top-24 z-50 bg-brand-red text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest neo-border shadow-[2px_2px_0_0_#000] flex items-center gap-2"
+          className="fixed top-24 z-50 bg-brand-red text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-gray-200 neo-shadow-sm flex items-center gap-2"
         >
           <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
           Offline Mode: Limited Sync
         </motion.div>
       )}
       
-      <main className="w-full max-w-lg px-0 pb-32 pt-20 relative min-h-screen flex flex-col">
+      <main className="w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pb-32 pt-20 relative min-h-screen flex flex-col">
         <AnimatePresence mode="wait">
           {currentTab === 'realita' && (
             <motion.div
@@ -344,9 +344,9 @@ export default function App() {
              <motion.div
                initial={{ scale: 0.5, rotate: -20, opacity: 0 }}
                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-               className="bg-white neo-border-lg p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative z-10"
+               className="bg-white border-2 border-gray-200 p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative z-10"
              >
-                <div className="mb-6 inline-block bg-brand-yellow p-4 rounded-3xl neo-border shadow-[4px_4px_0_0_#2D3436]">
+                <div className="mb-6 inline-block bg-brand-yellow p-4 rounded-3xl border-2 border-gray-200 neo-shadow">
                    <TrendingUp className="w-12 h-12 text-brand-dark" />
                 </div>
                 <h2 className="text-5xl font-black italic uppercase tracking-tighter mb-2">LEVEL UP!</h2>
@@ -358,13 +358,13 @@ export default function App() {
                    </div>
                    <ChevronRight className="w-8 h-8 text-brand-dark opacity-20" />
                    <div className="flex flex-col items-center">
-                      <span className="text-6xl font-mono font-black italic bg-brand-teal px-4 rounded-2xl neo-border">LVL {sleepFlow.data.newLevel}</span>
+                      <span className="text-6xl font-mono font-black italic bg-brand-teal px-4 rounded-2xl border-2 border-gray-200">LVL {sleepFlow.data.newLevel}</span>
                    </div>
                 </div>
 
                 <button
                   onClick={() => setSleepFlow({ step: null, data: null })}
-                  className="w-full bg-brand-dark text-white font-black py-5 rounded-2xl neo-shadow hover:bg-brand-dark/90 active:shadow-none active:translate-y-1 transition-all uppercase italic tracking-tighter text-xl"
+                  className="w-full bg-brand-dark text-white font-black py-5 rounded-2xl neo-shadow-lg hover:bg-brand-dark/90 active:scale-95 transition-all uppercase italic tracking-tighter text-xl"
                 >
                   TERIMA KEKUATAN BARU
                 </button>
@@ -384,10 +384,10 @@ export default function App() {
               initial={{ scale: 0.5, y: 100, rotate: 10 }}
               animate={{ scale: 1, y: 0, rotate: 0 }}
               exit={{ scale: 0.5, opacity: 0 }}
-              className="bg-white neo-border-lg p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative"
+              className="bg-white border-2 border-gray-200 p-10 rounded-[3rem] neo-shadow-lg text-center max-w-sm relative"
               onClick={e => e.stopPropagation()}
             >
-              <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-yellow rounded-full neo-border flex items-center justify-center text-5xl shadow-[4px_4px_0_0_#2D3436] animate-bounce">
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-yellow rounded-full border-2 border-gray-200 flex items-center justify-center text-5xl neo-shadow animate-bounce">
                 {gachaReward.type === 'gold' ? '💰' : gachaReward.type === 'silver' ? '🪙' : gachaReward.type === 'exp' ? '✨' : '❤️'}
               </div>
 
@@ -395,7 +395,7 @@ export default function App() {
                 <h3 className="text-4xl font-black italic uppercase tracking-tighter mb-2 text-brand-dark">Kuil Nasib</h3>
                 <p className="text-gray-400 font-extrabold uppercase text-[10px] tracking-[0.3em] mb-6">Berkat yang Diterima</p>
                 
-                <div className="bg-brand-bg neo-border rounded-3xl p-6 mb-8">
+                <div className="bg-brand-bg border-2 border-gray-200 rounded-3xl p-6 mb-8">
                   <span className="text-6xl font-black font-mono text-brand-teal">+{gachaReward.amount}</span>
                   <p className="text-xs font-black uppercase text-brand-dark/40 mt-1">{gachaReward.type}</p>
                 </div>
@@ -404,7 +404,7 @@ export default function App() {
 
                 <button
                   onClick={() => setGachaReward(null)}
-                  className="w-full bg-brand-teal text-brand-dark font-black py-5 rounded-2xl neo-shadow hover:bg-brand-teal/90 active:shadow-none active:translate-y-1 transition-all uppercase italic tracking-tighter text-xl"
+                  className="w-full bg-brand-teal text-brand-dark font-black py-5 rounded-2xl neo-shadow-lg hover:bg-brand-teal/90 active:scale-95 transition-all uppercase italic tracking-tighter text-xl"
                 >
                   SYUKUR
                 </button>
@@ -423,7 +423,7 @@ export default function App() {
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              className={`w-full max-w-xs p-8 rounded-[2.5rem] neo-border-lg neo-shadow-lg text-center ${
+              className={`w-full max-w-xs p-8 rounded-[2.5rem] border-2 border-gray-200 neo-shadow-lg text-center ${
                 conversionStatus.success ? 'bg-white' : 'bg-brand-red text-white'
               }`}
               onClick={e => e.stopPropagation()}
@@ -445,7 +445,7 @@ export default function App() {
               </p>
               <button
                 onClick={() => setConversionStatus(null)}
-                className={`w-full py-4 rounded-2xl font-black uppercase italic tracking-tighter neo-shadow transition-all active:shadow-none active:translate-y-1 ${
+                className={`w-full py-4 rounded-2xl font-black uppercase italic tracking-tighter neo-shadow-lg transition-all active:scale-95 ${
                   conversionStatus.success ? 'bg-brand-teal text-brand-dark' : 'bg-white text-brand-red'
                 }`}
               >

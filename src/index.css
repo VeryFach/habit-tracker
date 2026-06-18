@@ -5,13 +5,57 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Playfair Display", serif;
-  
-  --color-brand-bg: #FDF6E3;
-  --color-brand-dark: #2D3436;
-  --color-brand-red: #FF6B6B;
-  --color-brand-teal: #4ECDC4;
-  --color-brand-yellow: #FFE66D;
-  --color-brand-purple: #A29BFE;
+
+  /* ── Core palette ───────────────────────────────────────────
+     Light: soft gray foundation, clean and spacious              */
+  --color-brand-bg: #F3F4F6;           /* gray-100 — soft canvas */
+  --color-brand-dark: #1E293B;         /* slate-800 — primary text */
+  --color-brand-surface: #FFFFFF;      /* pure white — card surfaces */
+  --color-brand-surface-alt: #F8FAFC;  /* slate-50 — nested/alt surfaces */
+  --color-brand-muted: #64748B;        /* slate-500 — secondary text */
+  --color-brand-border: #D1D5DB;       /* gray-300 — visible borders */
+
+  /* ── Accent colors ──────────────────────────────────────────
+     Pastel-forward, vibrant but not harsh                       */
+  --color-brand-red: #FF6B6B;          /* coral — primary accent + danger */
+  --color-brand-teal: #14B8A6;         /* teal-500 — success/primary action */
+  --color-brand-yellow: #FACC15;       /* yellow-400 — reward/highlight */
+  --color-brand-purple: #A78BFA;       /* violet-400 — premium accent */
+
+  /* ── Semantic tokens ────────────────────────────────────────
+     Intent-based aliases for common UI patterns                 */
+  --color-brand-primary: #14B8A6;      /* teal-500 — interactive primary */
+  --color-brand-primary-hover: #0D9488;/* teal-600 — primary hover state */
+  --color-brand-success: #22C55E;      /* green-500  — positive feedback */
+  --color-brand-warning: #FACC15;      /* yellow-400 — caution state */
+  --color-brand-danger: #FF6B6B;       /* coral — destructive action */
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────
+   Slate-based depth layers with luminous accents for readability  */
+.dark {
+  --color-brand-bg: #020617;           /* slate-950 — deepest dark canvas */
+  --color-brand-dark: #F8FAFC;         /* slate-50  — bright text on dark */
+  --color-brand-surface: #0F172A;      /* slate-900 — elevated cards */
+  --color-brand-surface-alt: #1E293B;  /* slate-800 — nested surfaces */
+  --color-brand-muted: #94A3B8;        /* slate-400 — secondary text */
+  --color-brand-border: #334155;       /* slate-700 — visible borders on dark */
+
+  --color-brand-red: #F87171;          /* red-400    — softer danger on dark */
+  --color-brand-teal: #2DD4BF;         /* teal-400   — luminous accent on dark */
+  --color-brand-yellow: #FACC15;       /* yellow-400 — consistent reward */
+  --color-brand-purple: #A78BFA;       /* violet-400 — readable secondary on dark */
+
+  --color-brand-primary: #2DD4BF;      /* teal-400 — visible primary on dark */
+  --color-brand-primary-hover: #14B8A6;/* teal-500 — hover on dark */
+  --color-brand-success: #4ADE80;      /* green-400  — positive on dark */
+  --color-brand-warning: #FBBF24;      /* amber-400  — caution on dark */
+  --color-brand-danger: #F87171;       /* red-400    — destructive on dark */
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
@@ -21,24 +65,43 @@
   }
 }
 
+/* ── Soft shadow utilities ───────────────────────────────────────
+   Diffused depth shadows (no hard offset — neumorphic-inspired)   */
 .neo-shadow-sm {
-  @apply shadow-[2px_2px_0_0_#2D3436];
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 }
 
 .neo-shadow {
-  @apply shadow-[4px_4px_0_0_#2D3436];
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .neo-shadow-lg {
-  @apply shadow-[8px_8px_0_0_#2D3436];
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
 }
 
+/* Dark mode: deeper shadows for contrast on dark surfaces */
+.dark .neo-shadow-sm {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .neo-shadow {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.dark .neo-shadow-lg {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Border utilities ────────────────────────────────────────────
+   Visible 2px borders using dedicated border token               */
 .neo-border {
-  @apply border-2 border-brand-dark;
+  @apply border-2;
+  border-color: var(--color-brand-border);
 }
 
 .neo-border-lg {
-  @apply border-4 border-brand-dark;
+  @apply border-2;
+  border-color: var(--color-brand-border);
 }
 
 .no-scrollbar::-webkit-scrollbar {

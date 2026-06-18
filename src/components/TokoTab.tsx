@@ -80,11 +80,11 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                 }}
                 className={`group flex items-center gap-4 p-5 rounded-[2rem] border-2 transition-all text-left relative overflow-hidden ${
                   canAfford 
-                    ? 'border-brand-dark bg-white neo-shadow active:translate-y-1 active:shadow-none hover:scale-[1.02]' 
-                    : 'border-gray-100 bg-gray-50 opacity-50 grayscale cursor-not-allowed'
+                    ? 'border-gray-200 bg-brand-surface neo-shadow active:scale-95 hover:scale-[1.02] border-brand-border bg-brand-surface'
+                    : 'border-gray-100 bg-gray-50 opacity-50 grayscale cursor-not-allowed border-brand-border bg-brand-surface/50'
                 }`}
               >
-                <div className={`w-14 h-14 rounded-2xl neo-border flex items-center justify-center flex-shrink-0 transition-transform group-hover:rotate-6 ${canAfford ? 'bg-brand-bg' : 'bg-gray-200'}`}>
+                <div className={`w-14 h-14 rounded-2xl border border-gray-200 border-brand-border flex items-center justify-center flex-shrink-0 transition-transform group-hover:rotate-6 ${canAfford ? 'bg-brand-bg' : 'bg-gray-200'}`}>
                   <Icon className="w-7 h-7 text-brand-dark" />
                 </div>
                 <div className="flex-1 min-w-0 pr-12">
@@ -94,7 +94,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                   </p>
                   <p className="text-[8px] font-bold text-gray-400 uppercase leading-none">{item.description}</p>
                 </div>
-                <div className="absolute right-4 bottom-4 flex items-center gap-1 bg-brand-yellow px-3 py-1.5 rounded-xl neo-border shadow-[2px_2px_0_0_#2D3436]">
+                <div className="absolute right-4 bottom-4 flex items-center gap-1 bg-brand-yellow px-3 py-1.5 rounded-xl border border-gray-200 neo-shadow-sm">
                   <Coins className="w-3.5 h-3.5 text-brand-dark" />
                   <span className="font-mono font-black text-xs text-brand-dark">{item.costGold}</span>
                 </div>
@@ -113,7 +113,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
 
         <div className="grid grid-cols-1 gap-6">
           {/* Silver TO Gold */}
-          <div className="bg-brand-dark rounded-[2.5rem] p-8 neo-border-lg neo-shadow-lg relative overflow-hidden">
+          <div className="bg-brand-dark rounded-[2.5rem] p-8 neo-shadow-lg relative overflow-hidden">
              <div className="flex items-center justify-between mb-8 relative z-10">
                 <div>
                   <h3 className="text-2xl font-black uppercase italic tracking-tighter text-brand-yellow">Liquid Asset</h3>
@@ -121,7 +121,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                 </div>
                 <div className="text-right">
                   <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-1">Market Rate</p>
-                  <div className="bg-white/10 px-3 py-1 rounded-full neo-border border-brand-yellow/30 text-[10px] font-black text-brand-yellow">
+                  <div className="bg-white/10 px-3 py-1 rounded-full border border-white/10 text-[10px] font-black text-brand-yellow">
                     {silverPerGoldRate}S : 1G
                   </div>
                 </div>
@@ -186,14 +186,14 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
              <button 
                onClick={() => onPurchase('gold', silverToGoldResult, silverToGoldInput)}
                disabled={stats.silver < silverToGoldInput || silverToGoldResult <= 0}
-               className="w-full bg-brand-yellow text-brand-dark neo-border-lg font-black uppercase py-5 rounded-[2rem] neo-shadow hover:scale-[1.02] active:scale-95 disabled:grayscale disabled:opacity-50 transition-all flex items-center justify-center gap-2 italic tracking-tighter text-xl"
+               className="w-full bg-brand-yellow text-brand-dark font-black uppercase py-5 rounded-[2rem] neo-shadow-lg hover:scale-[1.02] active:scale-95 disabled:grayscale disabled:opacity-50 transition-all flex items-center justify-center gap-2 italic tracking-tighter text-xl"
              >
                Confirm Conversion
              </button>
           </div>
 
           {/* Gold TO Silver */}
-          <div className="bg-white rounded-[2.5rem] p-8 neo-border-lg neo-shadow-lg">
+          <div className="bg-brand-surface rounded-[2.5rem] p-8 border-2 border-gray-200 neo-shadow-lg border-brand-border bg-brand-surface">
              <div className="flex items-center justify-between mb-8">
                 <div>
                   <h3 className="text-2xl font-black uppercase italic tracking-tighter text-brand-teal">Treasury Exchange</h3>
@@ -201,7 +201,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                 </div>
                 <div className="text-right">
                   <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Market Rate</p>
-                  <div className="bg-brand-bg px-3 py-1 rounded-full neo-border border-brand-teal/30 text-[10px] font-black text-brand-teal">
+                  <div className="bg-brand-bg px-3 py-1 rounded-full border border-gray-200 border-brand-border text-[10px] font-black text-brand-teal">
                     1G : {goldToSilverRate}S
                   </div>
                 </div>
@@ -217,7 +217,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                              <button 
                                key={val}
                                onClick={() => setGoldToSilverInput(val)}
-                               className="px-2 py-1 bg-gray-50 hover:bg-gray-100 rounded-md text-[8px] font-black text-gray-400 transition-colors"
+                               className="px-2 py-1 bg-brand-surface-alt hover:bg-brand-border rounded-md text-[8px] font-black text-gray-400 transition-colors bg-brand-surface-alt hover:bg-brand-surface-alt text-brand-muted"
                              >
                                {val}
                              </button>
@@ -237,7 +237,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                         step="5"
                         value={goldToSilverInput}
                         onChange={(e) => setGoldToSilverInput(Number(e.target.value))}
-                        className="w-full h-1.5 bg-gray-100 rounded-full appearance-none cursor-pointer accent-brand-teal"
+                        className="w-full h-1.5 bg-gray-100 rounded-full appearance-none cursor-pointer accent-brand-teal bg-brand-surface-alt"
                       />
                    </div>
                    <div className="w-20 text-center">
@@ -246,7 +246,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
                    </div>
                 </div>
 
-                <div className="bg-brand-bg rounded-2xl p-4 flex items-center justify-between border border-brand-dark/5">
+                <div className="bg-brand-bg rounded-2xl p-4 flex items-center justify-between border border-gray-200 border-brand-border">
                    <div className="flex items-center gap-3">
                       <div className="p-2 bg-brand-teal/20 rounded-xl">
                         <RefreshCw className="w-4 h-4 text-brand-teal animate-spin-slow" />
@@ -266,7 +266,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
              <button 
                onClick={() => onPurchase('silver', goldToSilverResult, goldToSilverInput)}
                disabled={stats.gold < goldToSilverInput || goldToSilverResult <= 0}
-               className="w-full bg-brand-teal text-brand-dark neo-border-lg font-black uppercase py-5 rounded-[2rem] neo-shadow hover:scale-[1.02] active:scale-95 disabled:grayscale disabled:opacity-50 transition-all flex items-center justify-center gap-2 italic tracking-tighter text-xl"
+               className="w-full bg-brand-teal text-brand-dark font-black uppercase py-5 rounded-[2rem] neo-shadow-lg hover:scale-[1.02] active:scale-95 disabled:grayscale disabled:opacity-50 transition-all flex items-center justify-center gap-2 italic tracking-tighter text-xl"
              >
                Liquidate to Silver
              </button>
@@ -275,7 +275,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
       </div>
 
       {/* Gacha System (Enhanced) */}
-      <div className="bg-brand-purple rounded-[2.5rem] p-8 text-white neo-border-lg neo-shadow-lg relative overflow-hidden group">
+      <div className="bg-brand-purple rounded-[2.5rem] p-8 text-white neo-shadow-lg relative overflow-hidden group">
         <div className="absolute top-0 right-0 p-8 opacity-10 blur-sm group-hover:blur-0 transition-all duration-700 pointer-events-none">
           <Sparkles className="w-40 h-40" />
         </div>
@@ -329,7 +329,7 @@ export function TokoTab({ stats, onPurchase, onGacha }: TokoTabProps) {
           <button 
             onClick={onGacha}
             disabled={stats.gold < 100}
-            className="w-full bg-white text-brand-dark neo-border-lg font-black uppercase py-6 rounded-[2rem] neo-shadow hover:bg-brand-yellow active:scale-95 disabled:grayscale disabled:opacity-50 transition-all text-xl flex items-center justify-center gap-2 mb-2 tracking-tighter italic"
+            className="w-full bg-white text-brand-dark font-black uppercase py-6 rounded-[2rem] neo-shadow-lg hover:bg-brand-yellow active:scale-95 disabled:grayscale disabled:opacity-50 transition-all text-xl flex items-center justify-center gap-2 mb-2 tracking-tighter italic"
           >
             Invoke the Shrine (100 G)
           </button>

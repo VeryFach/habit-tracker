@@ -51,9 +51,9 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
   return (
     <div className={`flex flex-col gap-6 ${isEmbedded ? '' : 'p-4 pb-32'}`}>
       {/* Header */}
-      <div className="bg-brand-dark text-white rounded-[2.5rem] p-6 neo-shadow-lg transform -rotate-1">
+      <div className="bg-brand-dark text-white rounded-[2.5rem] p-6 neo-shadow transform -rotate-1">
         <div className="flex items-center gap-4">
-          <div className="bg-brand-yellow p-2.5 rounded-2xl neo-border shadow-[2px_2px_0_0_#000]">
+          <div className="bg-brand-yellow p-2.5 rounded-2xl border border-gray-200 neo-shadow-sm">
             <Trophy className="w-6 h-6 text-brand-dark" />
           </div>
           <div>
@@ -76,14 +76,14 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
               className={`flex items-center gap-4 p-4 rounded-[2rem] border-2 transition-all ${
-                isTop3 ? 'bg-white border-brand-dark neo-shadow-lg' : 'bg-white/50 border-brand-dark/10'
+                isTop3 ? 'bg-white border-gray-200 neo-shadow-lg' : 'bg-white/50 border-gray-200/50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-2xl neo-border flex items-center justify-center font-black text-xl shadow-[2px_2px_0_0_#000] flex-shrink-0 ${isTop3 ? medalColors[index] : 'bg-brand-bg'}`}>
+              <div className={`w-12 h-12 rounded-2xl border border-gray-200 flex items-center justify-center font-black text-xl neo-shadow-sm flex-shrink-0 ${isTop3 ? medalColors[index] : 'bg-brand-bg'}`}>
                 {index + 1}
               </div>
 
-              <div className="w-12 h-12 rounded-full neo-border overflow-hidden flex-shrink-0">
+              <div className="w-12 h-12 rounded-full border-2 border-gray-200 overflow-hidden flex-shrink-0">
                  {entry.photoURL ? (
                     <img src={entry.photoURL} alt={entry.displayName} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                  ) : (
@@ -128,7 +128,7 @@ export function LeaderboardTab({ isEmbedded }: LeaderboardTabProps) {
         )}
       </div>
 
-      <div className="p-8 bg-brand-teal/5 border-2 border-brand-teal/10 rounded-[2.5rem] mt-4">
+      <div className="p-8 bg-brand-teal/5 border-2 border-brand-teal/15 rounded-[2.5rem] mt-4">
          <p className="text-[10px] font-black text-brand-teal uppercase tracking-[0.2em] mb-2 leading-tight">Expansion Note</p>
          <p className="text-xs font-bold text-gray-500 leading-relaxed italic">
            Rankings are updated every time you complete a daily report or build infrastructure. Only the top 20 survivors are shown.

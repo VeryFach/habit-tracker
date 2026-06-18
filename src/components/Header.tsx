@@ -1,120 +1,67 @@
 import { Coins, Gem, Heart } from 'lucide-react';
-import { useThemeStore } from '../hooks/useThemeStore';
 import { UserStats } from '../types';
+import { ThemeToggle } from './ThemeToggle';
 
 interface HeaderProps {
   stats: UserStats;
 }
 
 export function Header({ stats }: HeaderProps) {
-  const { isDark } = useThemeStore();
-  
-  const palette = isDark
-    ? {
-        container: '#0F172A',
-        surface: '#1E293B',
-        border: '#334155',
-        text: '#F8FAFC',
-        muted: '#94A3B8',
-        progressBg: '#334155',
-      }
-    : {
-        container: '#FF6B6B',
-        surface: '#FFFFFF',
-        border: '#2D3436',
-        text: '#2D3436',
-        muted: '#475569',
-        progressBg: '#CCCCCC',
-      };
-
   const expProgress = (stats.exp / stats.maxExp) * 100;
 
   return (
-    <header 
-      className="fixed top-0 left-0 right-0 neo-border-lg neo-shadow flex items-center justify-between px-6 z-50"
-      style={{
-        height: '80px',
-        backgroundColor: palette.container,
-        borderBottomColor: palette.border,
-        borderBottomWidth: 4,
-        boxShadow: '4px 4px 0px 0px rgba(0,0,0,0.2)',
-      }}
+    <header
+      className="
+        fixed top-0 left-0 right-0 z-50
+        bg-brand-red border-b-2 border-brand-border
+        neo-shadow-sm
+      "
+      style={{ height: '80px' }}
     >
-      <div className="flex items-center gap-3">
+      <div className="w-full max-w-7xl mx-auto h-full flex items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* HP Badge */}
-        <div 
-          className="neo-border px-3 py-1 rounded-full flex items-center gap-2"
-          style={{
-            backgroundColor: palette.surface,
-            borderColor: palette.border,
-            boxShadow: '2px 2px 0px 0px #2D3436',
-          }}
-        >
-          <Heart className="w-4 h-4 text-brand-red fill-brand-red" />
-          <span className="text-sm font-black" style={{ color: palette.text }}>
+        <div className="border-2 border-brand-border px-2.5 py-1 rounded-full flex items-center gap-1.5 bg-brand-surface neo-shadow-sm">
+          <Heart className="w-3.5 h-3.5 text-brand-red fill-brand-red" />
+          <span className="text-xs font-black text-brand-dark">
             {stats.hp}/{stats.maxHp} HP
           </span>
         </div>
 
         {/* LVL Badge */}
-        <div 
-          className="neo-border px-3 py-1 rounded-full flex items-center gap-2"
-          style={{
-            backgroundColor: palette.surface,
-            borderColor: palette.border,
-            boxShadow: '2px 2px 0px 0px #2D3436',
-          }}
-        >
-          <span className="text-[10px] uppercase font-black tracking-tight" style={{ color: palette.text }}>
+        <div className="border-2 border-brand-border px-2.5 py-1 rounded-full flex items-center gap-1.5 bg-brand-surface neo-shadow-sm">
+          <span className="text-[10px] uppercase font-black tracking-tight text-brand-dark">
             LVL {stats.level}
           </span>
-          <div 
-            className="rounded-full overflow-hidden neo-border"
-            style={{
-              width: '60px',
-              height: '10px',
-              backgroundColor: palette.progressBg,
-              borderColor: palette.border,
-            }}
-          >
-            <div 
-              className="h-full bg-brand-teal transition-all duration-500" 
-              style={{ width: `${expProgress}%` }} 
+          <div className="w-14 sm:w-16 h-2.5 rounded-full overflow-hidden border border-brand-border bg-brand-bg">
+            <div
+              className="h-full bg-brand-teal transition-all duration-500"
+              style={{ width: `${expProgress}%` }}
             />
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Gold */}
-        <div 
-          className="neo-border px-3 py-1 rounded-lg flex items-center gap-2"
-          style={{
-            backgroundColor: '#FFE66D',
-            borderColor: palette.border,
-            boxShadow: '2px 2px 0px 0px #2D3436',
-          }}
-        >
-          <Coins className="w-4 h-4 text-brand-dark" />
-          <span className="font-black text-sm text-brand-dark">
+        <div className="border border-gray-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-yellow neo-shadow-sm">
+          <Coins className="w-3.5 h-3.5 text-brand-dark" />
+          <span className="font-black text-xs text-brand-dark">
             {stats.gold.toLocaleString()}
           </span>
         </div>
 
         {/* Silver */}
-        <div 
-          className="neo-border px-3 py-1 rounded-lg flex items-center gap-2"
-          style={{
-            backgroundColor: '#A29BFE',
-            borderColor: palette.border,
-            boxShadow: '2px 2px 0px 0px #2D3436',
-          }}
-        >
-          <Gem className="w-4 h-4 text-white" />
-          <span className="font-black text-sm text-white">
+        <div className="border border-gray-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5 bg-brand-purple neo-shadow-sm">
+          <Gem className="w-3.5 h-3.5 text-white" />
+          <span className="font-black text-xs text-white">
             {stats.silver.toLocaleString()}
           </span>
         </div>
+
+        {/* Theme Toggle */}
+        <ThemeToggle variant="compact" />
+      </div>
       </div>
     </header>
   );

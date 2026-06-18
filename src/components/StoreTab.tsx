@@ -10,7 +10,7 @@ import {
     Zap,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { themeColors, useThemeStore } from '../hooks/useThemeStore';
+import { useTheme } from '../context/ThemeContext';
 import { UserStats } from '../types';
 
 interface GachaReward {
@@ -44,8 +44,10 @@ const RECOVERY_ITEMS = [
 ];
 
 export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
-  const { isDark } = useThemeStore();
-  const colors = isDark ? themeColors.dark : themeColors.light;
+  const { isDark } = useTheme();
+  const colors = isDark
+    ? { bg: '#0F172A', surface: '#1E293B', surfaceAlt: '#334155', border: '#334155', text: '#F1F5F9', textMuted: '#94A3B8' }
+    : { bg: '#FDF6E3', surface: '#FFFFFF', surfaceAlt: '#F1F5F9', border: '#E2E8F0', text: '#1E293B', textMuted: '#64748B' };
   
   const [silverInput, setSilverInput] = useState(100);
   const [goldInput, setGoldInput] = useState(10);
@@ -176,7 +178,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
                 key={item.id}
                 disabled={!canAfford}
                 onClick={() => handleRecoveryPurchase(item)}
-                className={`neo-border p-4 rounded-2xl transition-all ${
+                className={`border-2 border-brand-border p-4 rounded-2xl transition-all ${
                   canAfford
                     ? 'hover:neo-shadow hover:scale-105 active:scale-95'
                     : 'opacity-50 cursor-not-allowed'
@@ -188,7 +190,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
               >
                 <div className="flex items-center justify-between mb-3">
                   <item.icon className="w-6 h-6" style={{ color: colors.text }} />
-                  <div className="bg-brand-yellow neo-border px-2 py-1 rounded-lg flex items-center gap-1">
+                  <div className="bg-brand-yellow border border-gray-200 px-2 py-1 rounded-lg flex items-center gap-1">
                     <Coins className="w-3 h-3" />
                     <span className="text-xs font-black">{item.costGold}</span>
                   </div>
@@ -212,13 +214,13 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
         </div>
 
         {/* Silver → Gold */}
-        <div className="neo-border-lg p-6 rounded-3xl mb-4 neo-shadow" style={{ backgroundColor: isDark ? '#1E293B' : '#2D3436', borderColor: isDark ? '#334155' : '#2D3436' }}>
+        <div className="border-2 border-gray-200 p-6 rounded-3xl mb-4 neo-shadow" style={{ backgroundColor: isDark ? '#1E293B' : '#2D3436', borderColor: isDark ? '#334155' : '#2D3436' }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h3 className="text-lg font-black italic uppercase text-brand-yellow">Liquid Asset</h3>
               <p className="text-xs font-black uppercase mt-1" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>City Silver → Habit Gold</p>
             </div>
-            <div className="neo-border rounded-2xl px-3 py-2" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)', borderColor: '#FBBF24' }}>
+            <div className="border border-brand-border rounded-2xl px-3 py-2" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)', borderColor: '#FBBF24' }}>
               <p className="text-[10px] font-black" style={{ color: isDark ? 'rgb(148, 163, 184)' : 'rgb(107, 114, 128)' }}>Market Rate</p>
               <p className="text-xs font-black text-brand-yellow">{silverPerGoldRate}S : 1G</p>
             </div>
@@ -259,7 +261,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
           <button
             onClick={handleSilverToGold}
             disabled={stats.silver < silverInput || silverToGoldResult <= 0}
-            className="w-full neo-border-lg p-4 rounded-2xl font-black italic uppercase text-brand-dark neo-shadow hover:neo-shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full p-4 rounded-2xl font-black italic uppercase text-brand-dark neo-shadow-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
             style={{ backgroundColor: '#FBBF24', borderColor: '#2D3436' }}
           >
             Confirm Conversion
@@ -267,13 +269,13 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
         </div>
 
         {/* Gold → Silver */}
-        <div className="neo-border p-6 rounded-3xl neo-shadow" style={{ backgroundColor: colors.surface, borderColor: colors.border }}>
+        <div className="border-2 border-gray-200 p-6 rounded-3xl neo-shadow border-brand-border" style={{ backgroundColor: colors.surface }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h3 className="text-lg font-black italic uppercase text-brand-teal">Treasury Exchange</h3>
               <p className="text-xs font-black uppercase mt-1" style={{ color: colors.textMuted }}>Habit Gold → City Silver</p>
             </div>
-            <div className="neo-border rounded-2xl px-3 py-2" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.1)' : 'rgb(241, 245, 249)', borderColor: '#14B8A6' }}>
+            <div className="border border-brand-border rounded-2xl px-3 py-2" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.1)' : 'rgb(241, 245, 249)', borderColor: '#14B8A6' }}>
               <p className="text-[10px] font-black" style={{ color: colors.textMuted }}>Market Rate</p>
               <p className="text-xs font-black text-brand-teal">1G : {goldToSilverRate}S</p>
             </div>
@@ -297,7 +299,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl mb-4 flex justify-between items-center neo-border" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.05)' : 'rgb(248, 250, 252)', borderColor: colors.border }}>
+          <div className="p-4 rounded-2xl mb-4 flex justify-between items-center border border-brand-border" style={{ backgroundColor: isDark ? 'rgba(20, 184, 166, 0.05)' : 'rgb(248, 250, 252)' }}>
             <div className="flex items-center gap-3">
               <RefreshCw className="w-4 h-4 text-brand-teal" />
               <div>
@@ -314,7 +316,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
           <button
             onClick={handleGoldToSilver}
             disabled={stats.gold < goldInput || goldToSilverResult <= 0}
-            className="w-full neo-border-lg p-4 rounded-2xl font-black italic uppercase neo-shadow hover:neo-shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full p-4 rounded-2xl font-black italic uppercase neo-shadow-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
             style={{ backgroundColor: '#14B8A6', color: '#2D3436', borderColor: '#2D3436' }}
           >
             Liquidate to Silver
@@ -323,7 +325,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
       </section>
 
       {/* Gacha Section */}
-      <section className="neo-border-lg p-6 rounded-3xl neo-shadow" style={{ backgroundColor: '#A29BFE', borderColor: '#7C3AED' }}>
+      <section className="p-6 rounded-3xl neo-shadow-lg" style={{ backgroundColor: '#A29BFE' }}>
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center gap-3">
             <Sparkles className="w-8 h-8 text-white fill-white" />
@@ -366,7 +368,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
         <button
           onClick={handleGacha}
           disabled={stats.gold < 100 || isOpeningGacha}
-          className="w-full neo-border-lg p-5 rounded-2xl font-black italic uppercase neo-shadow hover:neo-shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all mb-4"
+          className="w-full p-5 rounded-2xl font-black italic uppercase neo-shadow-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed transition-all mb-4 active:scale-95"
           style={{ backgroundColor: '#FFFFFF', color: '#2D3436', borderColor: '#2D3436' }}
         >
           {isOpeningGacha ? 'Opening...' : 'Invoke the Shrine (100 G)'}
@@ -387,7 +389,7 @@ export function StoreTab({ stats, onPurchase, onGacha }: StoreTabProps) {
       {/* Popup */}
       {popupVisible && popupResult && (
         <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
-          <div className="animate-bounce neo-border-lg p-6 rounded-3xl neo-shadow max-w-xs" style={{ backgroundColor: colors.surface, borderColor: colors.border }}>
+          <div className="animate-bounce border-2 border-gray-200 p-6 rounded-3xl neo-shadow-lg max-w-xs border-brand-border" style={{ backgroundColor: colors.surface }}>
             <div className={`text-center`}>
               <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center mx-auto mb-3`} style={{ borderColor: popupResult.color === 'brand-red' ? '#FF6B6B' : popupResult.color === 'brand-teal' ? '#4ECDC4' : popupResult.color === 'brand-yellow' ? '#FFE66D' : '#A29BFE', backgroundColor: popupResult.color === 'brand-red' ? 'rgba(255, 107, 107, 0.1)' : popupResult.color === 'brand-teal' ? 'rgba(78, 205, 196, 0.1)' : popupResult.color === 'brand-yellow' ? 'rgba(255, 230, 109, 0.1)' : 'rgba(162, 155, 254, 0.1)' }}>
                 {popupResult.icon === 'check' && <CheckCircle className="w-8 h-8 text-brand-red" />}

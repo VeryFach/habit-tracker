@@ -27,12 +27,12 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-brand-dark/98 backdrop-blur-3xl z-[500] flex items-center justify-center p-6 overflow-y-auto"
+      className="fixed inset-0 bg-slate-900/98 backdrop-blur-3xl z-[500] flex items-center justify-center p-6 overflow-y-auto"
     >
       <motion.div 
         initial={{ scale: 0.9, y: 50 }}
         animate={{ scale: 1, y: 0 }}
-        className="w-full max-w-sm py-8"
+        className="w-full max-w-sm sm:max-w-lg lg:max-w-2xl mx-auto py-8"
       >
         <div className="text-center mb-8">
            <motion.div 
@@ -208,7 +208,7 @@ export function DailyReportOverlay({ report, stats, onClose }: DailyReportOverla
 
         <button 
           onClick={onClose}
-          className="w-full bg-brand-teal text-brand-dark neo-border-lg font-black uppercase py-5 rounded-[2rem] mt-8 neo-shadow hover:scale-[1.02] active:scale-95 active:shadow-none transition-all text-xl tracking-tighter italic"
+          className="w-full bg-brand-teal text-brand-dark font-black uppercase py-5 rounded-[2rem] mt-8 neo-shadow-lg hover:scale-[1.02] active:scale-95 transition-all text-xl tracking-tighter italic"
         >
           Begin New Cycle
         </button>

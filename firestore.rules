@@ -82,7 +82,7 @@ service cloud.firestore {
         && isValidUser(request.resource.data)
         && request.resource.data.updatedAt == request.time;
       
-      allow delete: if false; // Survival game, no deletion for now
+      allow delete: if isOwner(userId); // Account deletion flow
 
       match /habits/{habitId} {
         allow get: if isOwner(userId) && isValidId(habitId);
@@ -101,8 +101,18 @@ service cloud.firestore {
         
         allow create: if isOwner(userId) && isValidId(logId) && isValidLog(request.resource.data);
         
-        // Logs are usually immutable
-        allow update, delete: if false;
+        // Logs are usually immutable, but owner can delete during account deletion
+        allow update: if false;
+        allow delete: if isOwner(userId) && isValidId(logId);
+      }
+
+      match /buildings/{buildingId} {
+        allow get: if isOwner(userId) && isValidId(buildingId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) && isValidId(buildingId);
+        allow update: if isOwner(userId) && isValidId(buildingId);
+        allow delete: if isOwner(userId) && isValidId(buildingId);
       }
     }
   }
